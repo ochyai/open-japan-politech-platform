@@ -10,7 +10,7 @@
 
 GovTechが「決まった政策をいかに届けるか」という行政の効率化を目的とし、CivicTechが「市民がいかに参加するか」という参加のチャネル拡張を志向するのに対し、PoliTechは政治の意思決定メカニズムそのものに焦点を当てる。そこでは市民とAIエージェントが協働し、政策のアジェンダ設定から合意形成、立法過程の監視に至るプロセス全体が、オープンかつ検証可能な技術基盤の上で再構成される。
 
-本論文は、政治のデジタル化を政党または企業が主導することの構造的問題を理論的に検討した上で、台湾（g0v/vTaiwan）、英国（mySociety）、米国（Code for America / FEC）、欧州（Decidim / CONSUL Democracy）、日本（チームみらい / OJPP構想）の5地域における事例を、6軸比較フレームワーク——非党派性、非企業性、オープンソース度、制度的接合性、参加の包摂性、エージェントレディ度——に基づいて分析する。
+本論文は、政治のデジタル化を政党または企業が主導することの構造的問題を理論的に検討した上で、台湾（g0v/vTaiwan）、英国（mySociety）、米国（Code for America / FEC）、欧州（Decidim / CONSUL Democracy）、日本（チームみらい / Open Japan PoliTech Platform構想）の5地域における事例を、6軸比較フレームワーク——非党派性、非企業性、オープンソース度、制度的接合性、参加の包摂性、エージェントレディ度——に基づいて分析する。
 
 分析の結果、以下の知見が導出された。第一に、GovTech・CivicTech・PoliTechの三概念を区分することで、各国の政治デジタル化の到達点と欠落を正確に診断できる。第二に、非党派性に加えて非企業性——プラットフォームの運営主体が営利企業から独立していること——が民主主義インフラの信頼性の前提条件である。第三に、AIエージェントの政治プロセスへの参入を前提とした「エージェントレディ」設計が、今後の政治インフラの不可避な要件となる。第四に、オープンソースであることがAIバイアスの検証可能性の前提条件であり、プロプライエタリなAIを政治プロセスに埋め込むことは検証不能なバイアスを民主主義の中核に組み込むことに等しい。
 
@@ -22,7 +22,7 @@ GovTechが「決まった政策をいかに届けるか」という行政の効�
 
 ### 1.1 問題の所在
 
-21世紀に入り、先進民主主義諸国において政党への信頼は歴史的な低水準にある。Eurobarometer（2024）によれば、EU市民のうち政党を「信頼する」と回答した割合はわずか17%にとどまり、国家政府への信頼（34%）や地方自治体への信頼（52%）と比較しても突出して低い。米国においても、Pew Research Center（2023）の調査は、連邦政府を「常に」または「ほぼ常に」信頼すると答えた市民が全体の20%に満たないことを報告している。日本でも同様の傾向が確認されており、NHK放送文化研究所の調査では政党を「信頼する」と答えた割合は長期にわたり低迷を続けている。
+21世紀に入り、先進民主主義諸国において政党への信頼は歴史的な低水準にある。Eurobarometerの調査 [1] によれば、EU市民のうち政党を「信頼する」と回答した割合はわずか17%にとどまり、国家政府への信頼（34%）や地方自治体への信頼（52%）と比較しても突出して低い。米国においても、Pew Research Centerの調査 [2] は、連邦政府を「常に」または「ほぼ常に」信頼すると答えた市民が全体の20%に満たないことを報告している。日本でも同様の傾向が確認されており、NHK放送文化研究所の調査では政党を「信頼する」と答えた割合は長期にわたり低迷を続けている。
 
 この文脈において、政治のデジタル化——すなわちデジタル技術を用いた民主主義の意思決定プロセスの変革——が世界各地で模索されている。台湾のvTaiwanやg0v、スペインのDecidim、アイスランドのクラウドソーシング憲法、ドイツのLiquidFeedbackなど、多様な取り組みが展開されてきた。しかし、こうした取り組みの多くに共通する重要な特徴がある。それは、政党ではなく、市民社会やオープンソースコミュニティが主導しているという点である。
 
@@ -32,7 +32,7 @@ GovTechが「決まった政策をいかに届けるか」という行政の効�
 
 政党が政治のデジタル化ツールを設計・運営する場合、以下の構造的問題が生じる。
 
-第一に、**党派性バイアスの問題**がある。プラットフォームの設計には不可避的に価値判断が伴う——どの議題を提示するか、どのような順序で表示するか、どの意見を可視化しやすくするか。政党が設計主体である場合、こうした設計上の選択に党の利害が反映されるリスクは構造的に排除できない。Stanford HAI（2025）の研究は、主要なLLM（ChatGPT、Claude、Gemini等）に知覚可能な党派的バイアスが存在することを明らかにし、ワシントン大学の研究（2025）は、バイアスを持つAIチャットボットとの数回の対話だけで利用者の政治的見解がモデルのバイアス方向にシフトすることを実証した。政党がこうしたAIを政治プラットフォームに組み込む場合、バイアスの増幅は避けがたい。
+第一に、**党派性バイアスの問題**がある。プラットフォームの設計には不可避的に価値判断が伴う——どの議題を提示するか、どのような順序で表示するか、どの意見を可視化しやすくするか。政党が設計主体である場合、こうした設計上の選択に党の利害が反映されるリスクは構造的に排除できない。Stanford HAIの研究 [3] は、主要なLLM（ChatGPT、Claude、Gemini等）に知覚可能な党派的バイアスが存在することを明らかにし、ワシントン大学の研究 [4] は、バイアスを持つAIチャットボットとの数回の対話だけで利用者の政治的見解がモデルのバイアス方向にシフトすることを実証した。政党がこうしたAIを政治プラットフォームに組み込む場合、バイアスの増幅は避けがたい。
 
 第二に、**利益相反の問題**がある。政治の透明化は、しばしば現職政治家にとって不利益をもたらす。日本の改正政治資金規正法（2024年12月可決）において、オンライン提出義務化の対象が全政治団体の約5%にとどまった事実は、政党がみずからの透明化に消極的であることを端的に示している。政治のデジタル化を推進する主体が、同時にデジタル化によって最も「損をする」主体でもあるという構造的な利益相反は、制度設計上の根本的な矛盾である。
 
@@ -42,7 +42,7 @@ GovTechが「決まった政策をいかに届けるか」という行政の効�
 
 政党の問題が指摘されるとき、しばしば「テック企業に任せればよい」という議論が浮上する。しかし、企業が政治のデジタル化を担う場合、政党とは異なるが同等に深刻な構造的問題が生じる。
 
-第一に、**利益相反の不可避性**がある。営利企業のプラットフォームは、株主利益の最大化という制約の下で設計される。広告収入モデルに依拠するプラットフォームでは、利用者のエンゲージメントを最大化するアルゴリズムが分極化を促進することが繰り返し実証されてきた。Facebook（Meta）の内部文書が明らかにしたように、同社のアルゴリズムは分極化を促進するコンテンツを優先的に表示し、それが民主主義プロセスに悪影響を及ぼすことを経営陣が認識しながらも、エンゲージメント指標を優先した（Haugen, 2021）。X（旧Twitter）においても、Elon Muskによる買収後のコンテンツモデレーション方針の急変は、単一の所有者が公共的な言論空間を恣意的に変更できることの危険性を示した。
+第一に、**利益相反の不可避性**がある。営利企業のプラットフォームは、株主利益の最大化という制約の下で設計される。広告収入モデルに依拠するプラットフォームでは、利用者のエンゲージメントを最大化するアルゴリズムが分極化を促進することが繰り返し実証されてきた。Facebook（Meta）の内部文書が明らかにしたように、同社のアルゴリズムは分極化を促進するコンテンツを優先的に表示し、それが民主主義プロセスに悪影響を及ぼすことを経営陣が認識しながらも、エンゲージメント指標を優先した [5]。X（旧Twitter）においても、Elon Muskによる買収後のコンテンツモデレーション方針の急変は、単一の所有者が公共的な言論空間を恣意的に変更できることの危険性を示した。
 
 第二に、**プロプライエタリ設計による検証不能性**がある。企業が運営する政治プラットフォームのアルゴリズムは、通常、営業秘密として非公開である。どのコンテンツがどのような基準で推薦・抑制されているのか、AIがどのようなバイアスを持って意見を要約・整理しているのか、外部からの検証は構造的に不可能である。民主主義のインフラが検証不能であることは、その正統性の根本的な毀損を意味する。
 
@@ -75,13 +75,13 @@ GovTechが「決まった政策をいかに届けるか」という行政の効�
 
 ## 2. 概念整理——GovTech vs CivicTech vs PoliTech
 
-本節では、本論文の分析の前提となる三つの概念の体系的区分を行う。「デジタル化」という語が政治・行政の文脈で用いられる際、そこには本質的に異なる三つの領域が存在するにもかかわらず、この区別はしばしば曖昧なまま放置されてきた。特に、CivicTechとGovTechの区別はGovOcal（2023）をはじめ一定の議論があるものの、政治の意思決定メカニズムそのものに焦点を当てた概念は体系化されてこなかった。
+本節では、本論文の分析の前提となる三つの概念の体系的区分を行う。「デジタル化」という語が政治・行政の文脈で用いられる際、そこには本質的に異なる三つの領域が存在するにもかかわらず、この区別はしばしば曖昧なまま放置されてきた。特に、CivicTechとGovTechの区別はGovOcal [6] をはじめ一定の議論があるものの、政治の意思決定メカニズムそのものに焦点を当てた概念は体系化されてこなかった。
 
 ### 2.1 GovTech（行政技術）——「決まった政策をいかに届けるか」
 
 GovTechとは、政府・自治体が提供する行政サービスの効率化・オンライン化を指す。手続きの電子化、データ基盤の整備、バックオフィスシステムの刷新、API連携を通じた政府機関間のデータ交換などが含まれる。本質的に「サービスデリバリーの改善」を目的としており、政治的意思決定のプロセスそのものには関与しない。主たる推進主体は政府である。
 
-代表的事例を見れば、この性格はより明瞭になる。エストニアのX-Roadは、政府機関間の分散型データ交換基盤として、2001年の運用開始以来20年以上にわたり世界で最も先進的な行政デジタルインフラの一つであり続けている（Kerikmäe & Rull, 2016）。シンガポールのGovTechも同様に、市民向けサービスの統合的なデジタル提供において世界的な模範とされる。日本のデジタル庁（2021年9月発足）は、マイナンバーカードの拡充、マイナポータルの改修、電子申請サービスの本格運用などを推進している。
+代表的事例を見れば、この性格はより明瞭になる。エストニアのX-Roadは、政府機関間の分散型データ交換基盤として、2001年の運用開始以来20年以上にわたり世界で最も先進的な行政デジタルインフラの一つであり続けている [7]。シンガポールのGovTechも同様に、市民向けサービスの統合的なデジタル提供において世界的な模範とされる。日本のデジタル庁（2021年9月発足）は、マイナンバーカードの拡充、マイナポータルの改修、電子申請サービスの本格運用などを推進している。
 
 これらの取り組みに共通する問いは、「既に決まった政策をいかに効率的に届けるか」である。行政DXは市民生活の利便性を向上させるが、以下の問いには答えられない——その政策は誰がどのようなプロセスで決めたのか、市民の声はどの段階でどのように反映されたのか、政策決定の過程は透明だったのか。
 
@@ -97,13 +97,13 @@ CivicTechの貢献は大きい。mySocietyの全サービスは年間3,000万セ
 
 本論文が提唱するPoliTechは、GovTechでもCivicTechでもない第三の概念である。PoliTechの対象は、政治の意思決定プロセスそのもの——アジェンダ設定、政策形成、合意形成、立法過程、政治資金の流れ——の技術的再構築にある。CivicTechの「上位概念」ではなく、政治の意思決定メカニズムに焦点を絞った独立の概念である。
 
-PoliTechの主たるアクターは、市民社会に加えてAIエージェントを含む。Lazar & Cuéllar（2025）が論じるように、AIエージェントが政治プロセスに参加する時代は既に到来しつつあり、エージェントが市民の「認知的補助装置（cognitive prosthetics）」として政策分析・比較・モニタリングを支援する形態は、技術的に実現可能な段階にある。
+PoliTechの主たるアクターは、市民社会に加えてAIエージェントを含む。Lazar & Cuéllar [8] が論じるように、AIエージェントが政治プロセスに参加する時代は既に到来しつつあり、エージェントが市民の「認知的補助装置（cognitive prosthetics）」として政策分析・比較・モニタリングを支援する形態は、技術的に実現可能な段階にある。
 
 PoliTechの具体的対象は以下の5領域に及ぶ。
 
 **第一に、政策形成プロセスの再構築**がある。vTaiwanがPol.isを用いて実現した大規模合意形成、Decidimの参加型予算、LiquidFeedbackの液体民主主義の実験など、政策がどのように決まるかのメカニズムそのものをデジタル技術で変革する試みがこれに該当する。
 
-**第二に、政策形成プロセスの透明化**がある。立法過程の可視化、ロビイングの公開、政策決定に至る議論の記録公開などがこれに含まれる。フランスのRépublique Numérique法（2016年）は、法案全文を公開し市民が修正・追加を提案できるオンライン協議を実施した世界初の事例であり、21,330人の参加者が8,501件の貢献を行った（Badouard et al., 2017）。
+**第二に、政策形成プロセスの透明化**がある。立法過程の可視化、ロビイングの公開、政策決定に至る議論の記録公開などがこれに含まれる。フランスのRépublique Numérique法（2016年）は、法案全文を公開し市民が修正・追加を提案できるオンライン協議を実施した世界初の事例であり、21,330人の参加者が8,501件の貢献を行った [9]。
 
 **第三に、政治資金の構造的透明化**がある。米国FECの包括的データ基盤とOpenSecrets等の媒介組織による分析インフラは、政治資金の流れを構造的に可視化するPoliTechの典型例である。
 
@@ -144,6 +144,18 @@ PoliTechの具体的対象は以下の5領域に及ぶ。
 
 混同が問題なのは、GovTechの着実な進展が「政治のデジタル化も進んでいる」という錯覚を生むからである。この錯覚は、政治プロセスの構造的変革に対する社会的な要求を抑制し、結果として現状の権力構造を温存する機能を果たしてしまう。PoliTechという概念を明示的に定義し、GovTech・CivicTechから区分することは、この構造的な目隠しを取り除くための第一歩である。
 
+### 2.6 PoliTech概念の系譜
+
+「PoliTech」の概念は、テクノロジーと政治の交差領域に独自の名称を与える複数の試みの中から形成されてきた。その系譜を確認することは、本論文のPoliTech定義の位置づけを明確にするために不可欠である。
+
+テクノロジーと政治の関係を概念化する試みは2010年代半ばに遡る。MIT Center for Civic Media [10] は2014年に「Political Tech」と「Civic Tech」の区別を論じ、選挙キャンペーンや政治運動のためのテクノロジー（Political Tech）と、市民の公共参加を支援するテクノロジー（Civic Tech）の間の概念的差異を指摘した。ただし、ここでのPolitical Techは候補者や政党の選挙戦術を効率化する技術を指しており、本論文が定義するPoliTech——政治の意思決定プロセスそのものの技術的変革——とは射程が異なる。
+
+日本においては、2018年4月のニコニコ超会議で小泉進次郎（当時・自民党筆頭副幹事長）が「PoliTech」の用語を提唱したことが、この概念が日本の公的議論に登場した最初期の契機となった。同年7月31日、落合陽一と小泉進次郎はニコニコ生放送「平成最後の夏期講習（社会科編）——人生100年時代の社会保障とPoliTech」と題した対談を行い、人口減少社会におけるテクノロジーと政治の融合の必要性を論じた。この議論は落合陽一『日本進化論』[11] として体系化され、PoliTechの概念を日本の公共言論に導入した最初期の体系的著作と位置づけられる。同書では、社会保障・教育・雇用といった政策領域を「テクノロジーで再定義する」アプローチが提示されており、本論文が定義するPoliTechの萌芽的議論である。
+
+一方、国際的な文脈では、Wilson [12] が「Political Technology」の概念をロシア発の政治操作技術のグローバル化という観点から分析しており、テクノロジーを用いた民主主義の強化ではなく、権威主義体制による民主主義の侵食という対極的な現象を扱っている。この対比は、PoliTechという概念が「何のための政治技術か」という規範的問いを内包していることを示している。
+
+本論文が定義するPoliTechは、MITの選挙戦術としてのPolitical Techでも、Wilsonの権威主義的Political Technologyでもなく、落合・小泉が提起した「テクノロジーで政治を再定義する」というアジェンダを、非党派的・非企業的・オープンソース・エージェントレディという4つの設計原則のもとで体系化したものである。
+
 ---
 
 ## 3. 理論的フレームワーク——6軸比較
@@ -152,49 +164,49 @@ PoliTechの具体的対象は以下の5領域に及ぶ。
 
 ### 3.1 参加型民主主義
 
-参加型民主主義の理論的基礎は、Pateman（1970）の古典的著作 *Participation and Democratic Theory* に遡る。Patemanは、参加のプロセスそのものが市民を「より良い市民」にする——すなわち、参加は民主主義の手段であると同時に目的でもあるという洞察を示した。とりわけ重要なのは、「擬似参加（pseudo-participation）」という概念である。これは、市民に参加の形式を提供しながら、実質的な決定権限を与えない参加形態を指す。Borge, Balcells, & Padró-Solanet（2023）がカタルーニャ州のDecidim導入を分析した研究は、デジタルプラットフォームにおいてもこの懸念が実証的に裏付けられることを示している。
+参加型民主主義の理論的基礎は、Pateman [13] の古典的著作 *Participation and Democratic Theory* に遡る。Patemanは、参加のプロセスそのものが市民を「より良い市民」にする——すなわち、参加は民主主義の手段であると同時に目的でもあるという洞察を示した。とりわけ重要なのは、「擬似参加（pseudo-participation）」という概念である。これは、市民に参加の形式を提供しながら、実質的な決定権限を与えない参加形態を指す。Borge, Balcells & Padró-Solanet [14] がカタルーニャ州のDecidim導入を分析した研究は、デジタルプラットフォームにおいてもこの懸念が実証的に裏付けられることを示している。
 
-Barber（1984）は *Strong Democracy* において、市民が政策決定に直接関与する「強い民主主義」を提唱した。Barberの構想にはテクノロジーの活用が含まれていたが、彼はテクノロジーが「民主主義をより強化する方向にも、より弱体化させる方向にも使われうる」ことを早くから指摘しており、AIによる世論操作のリスクを考えるとき先見的であったと言わざるをえない。
+Barber [15] は *Strong Democracy* において、市民が政策決定に直接関与する「強い民主主義」を提唱した。Barberの構想にはテクノロジーの活用が含まれていたが、彼はテクノロジーが「民主主義をより強化する方向にも、より弱体化させる方向にも使われうる」ことを早くから指摘しており、AIによる世論操作のリスクを考えるとき先見的であったと言わざるをえない。
 
 ### 3.2 熟議民主主義
 
-Fishkin（1991, 2009, 2011）が考案した熟議的世論調査（Deliberative Polling）は、単なる「意見の集約（aggregation）」ではなく「熟議を経た判断（deliberated judgment）」が民主主義の正統性の源泉であるという主張を核心とする。
+Fishkin [16] が考案した熟議的世論調査（Deliberative Polling）は、単なる「意見の集約（aggregation）」ではなく「熟議を経た判断（deliberated judgment）」が民主主義の正統性の源泉であるという主張を核心とする。
 
 この理論は、PoliTechの文脈で二重に重要である。第一に、Pol.isの「合意点の可視化」やDecidimの「討論コンポーネント」など、オンライン上で熟議の条件を技術的に実装しようとする試みの理論的基盤を提供する。台湾のvTaiwanはPol.isを実装し、Uberの規制やオンライン酒類販売などの政策課題において実際に合意形成を達成した。第二に、AIエージェントが熟議に参加する場合——例えば論点の整理、エビデンスの提示、合意点の可視化——において、エージェントの役割をFishkinの熟議の基準に照らして設計する必要性を示唆する。
 
 ### 3.3 デジタル民主主義とオープン・デモクラシー
 
-Landemore（2021）は *Open Democracy* において、選挙に基づかない民主主義の可能性を理論的に探究した。アイスランドのクラウドソーシング憲法の分析（Landemore, 2015）に基づき、「開かれたインクルーシブなプロセスがより良い成果をもたらす」という主張を展開した。
+Landemore [17] は *Open Democracy* において、選挙に基づかない民主主義の可能性を理論的に探究した。アイスランドのクラウドソーシング憲法の分析 [18] に基づき、「開かれたインクルーシブなプロセスがより良い成果をもたらす」という主張を展開した。
 
-Simon et al.（2017）は、デジタルツールが民主主義を実質的にエンパワーするための条件として、インクルーシブ性、熟議の質、制度的統合、透明性と説明責任の4つを挙げた。アイスランドのクラウドソーシング憲法が国民投票で3分の2の賛成を得ながら議会に拒否されたことは、「制度的統合」がいかに決定的かを教えている。
+Simon et al. [19] は、デジタルツールが民主主義を実質的にエンパワーするための条件として、インクルーシブ性、熟議の質、制度的統合、透明性と説明責任の4つを挙げた。アイスランドのクラウドソーシング憲法が国民投票で3分の2の賛成を得ながら議会に拒否されたことは、「制度的統合」がいかに決定的かを教えている。
 
 ### 3.4 オープンソースガバナンスと非企業性
 
-Raymond（1999）の *The Cathedral and the Bazaar* が定式化した「十分な目があれば、全てのバグは浅い」（Linus' Law）は、政治プロセスの透明性と集合知の活用に関する一般的原理として読み替えることができる。Weber（2004）は、所有権の分散化、ピアレビューによる品質保証、フォークの自由による権力の分散といった特性が、伝統的な階層的組織とは根本的に異なるガバナンスモデルを構成することを示した。
+Raymond [20] の *The Cathedral and the Bazaar* が定式化した「十分な目があれば、全てのバグは浅い」（Linus' Law）は、政治プロセスの透明性と集合知の活用に関する一般的原理として読み替えることができる。Weber [21] は、所有権の分散化、ピアレビューによる品質保証、フォークの自由による権力の分散といった特性が、伝統的な階層的組織とは根本的に異なるガバナンスモデルを構成することを示した。
 
-これらの原理は、PoliTechにおける**非企業性**の理論的根拠を提供する。DecidimやCONSUL Democracyがいずれも AGPL-3.0 ライセンスの下でオープンソースとして公開されている事実は、民主主義のインフラそのものを公共財（commons）として共同管理するという思想の実践的表現である。Barandiaran et al.（2024）が「デジタルコモンズ」として概念化するこの立場は、Facebook、X/Twitter等のプロプライエタリなプラットフォームが支配するソーシャルメディア空間とは根本的に異なる。
+これらの原理は、PoliTechにおける**非企業性**の理論的根拠を提供する。DecidimやCONSUL Democracyがいずれも AGPL-3.0 ライセンスの下でオープンソースとして公開されている事実は、民主主義のインフラそのものを公共財（commons）として共同管理するという思想の実践的表現である。Barandiaran et al. [22] が「デジタルコモンズ」として概念化するこの立場は、Facebook、X/Twitter等のプロプライエタリなプラットフォームが支配するソーシャルメディア空間とは根本的に異なる。
 
 プロプライエタリなプラットフォームは、その定義上、設計に組み込まれたバイアスを外部から検証することが不可能である。これは「便利だがオープンでない」という程度の問題ではなく、民主主義のインフラの正統性に関わる根本的な問題である。営利企業が政治プラットフォームを運営する場合、利用者データの商業利用、アルゴリズムの不透明性、サービス継続の不確実性という三重の問題が不可避的に生じる。
 
-Barandiaran et al.（2024）のテクノポリティクス論は、この問題をさらに深く照射する。テクノポリティクスとは、テクノロジーと政治が相互に構成し合う動的な関係性を指す。プラットフォームの「設計そのものが政治的行為である」という認識は、設計主体の独立性——政党からも企業からも——がなぜ決定的に重要かという問いと直結する。
+Barandiaran et al. [22] のテクノポリティクス論は、この問題をさらに深く照射する。テクノポリティクスとは、テクノロジーと政治が相互に構成し合う動的な関係性を指す。プラットフォームの「設計そのものが政治的行為である」という認識は、設計主体の独立性——政党からも企業からも——がなぜ決定的に重要かという問いと直結する。
 
 ### 3.5 AIエージェントと民主主義
 
-AIエージェントの政治プロセスへの参入は、もはや遠い未来の話ではない。Lazar & Cuéllar（2025）は、Knight Columbia / Carnegie Endowmentの報告書「AI Agents and Democratic Resilience」において、AIエージェントが民主主義的プロセスに対してもたらす機会と脅威を体系的に分析した。彼らの議論の核心は、AIエージェントが市民の「認知的補助装置（cognitive prosthetics）」として機能しうる一方で、政治的エージェンシーの委譲がもたらすリスク——アジェンダの暗黙的操作、選好の歪曲、民主的統制の喪失——を正面から扱う必要があるという点にある。
+AIエージェントの政治プロセスへの参入は、もはや遠い未来の話ではない。Lazar & Cuéllar [8] は、Knight Columbia / Carnegie Endowmentの報告書「AI Agents and Democratic Resilience」において、AIエージェントが民主主義的プロセスに対してもたらす機会と脅威を体系的に分析した。彼らの議論の核心は、AIエージェントが市民の「認知的補助装置（cognitive prosthetics）」として機能しうる一方で、政治的エージェンシーの委譲がもたらすリスク——アジェンダの暗黙的操作、選好の歪曲、民主的統制の喪失——を正面から扱う必要があるという点にある。
 
-Summerfield, Argyle et al.（2025）はNature Human Behaviourにおいて、先進的AI システムが民主主義に及ぼす影響を包括的に検討し、AIによる世論操作、情報環境の劣化、政治参加パターンの変容といったリスクを実証的データに基づいて分析した。同時に、AIが市民の情報アクセスを改善し、政策理解を深め、参加の障壁を下げる可能性も指摘している。
+Summerfield, Argyle et al. [23] はNature Human Behaviourにおいて、先進的AI システムが民主主義に及ぼす影響を包括的に検討し、AIによる世論操作、情報環境の劣化、政治参加パターンの変容といったリスクを実証的データに基づいて分析した。同時に、AIが市民の情報アクセスを改善し、政策理解を深め、参加の障壁を下げる可能性も指摘している。
 
-Lazar（2025）は「Levels of Autonomy for AI Agents」において、AIエージェントの自律性を段階的に定義するフレームワークを提示した。政治的文脈においては、エージェントの自律性レベルの設計が民主的統制と密接に関わる。完全に自律的なエージェントが市民に代わって政治的判断を下すことは民主主義の原理に反するが、情報収集・整理・比較の段階で高い自律性を持つエージェントが市民の判断を支援することは、参加の質と量を同時に向上させうる。
+Lazar [24] は「Levels of Autonomy for AI Agents」において、AIエージェントの自律性を段階的に定義するフレームワークを提示した。政治的文脈においては、エージェントの自律性レベルの設計が民主的統制と密接に関わる。完全に自律的なエージェントが市民に代わって政治的判断を下すことは民主主義の原理に反するが、情報収集・整理・比較の段階で高い自律性を持つエージェントが市民の判断を支援することは、参加の質と量を同時に向上させうる。
 
-Kuo & Nolan（2022）がNature Human Behaviourで発表した「Human-centred mechanism design with Democratic AI」は、AIが民主的プロセスの中で機能するための制度設計原則を論じている。彼らの「民主的AI」概念は、AIの設計そのものを民主的プロセスに委ねるという構想であり、オードリー・タンの「アラインメント・アセンブリ」構想と共鳴する。
+Kuo & Nolan [25] がNature Human Behaviourで発表した「Human-centred mechanism design with Democratic AI」は、AIが民主的プロセスの中で機能するための制度設計原則を論じている。彼らの「民主的AI」概念は、AIの設計そのものを民主的プロセスに委ねるという構想であり、オードリー・タンの「アラインメント・アセンブリ」構想と共鳴する。
 
 これらの研究が示すのは、AIエージェントの政治的役割は「使うか使わないか」の二択ではなく、「どのレベルの自律性を、どの政治プロセスの段階で、どのような民主的統制の下で許容するか」という精緻な制度設計の問題であるということである。
 
 ### 3.6 液体民主主義の教訓
 
-液体民主主義（Liquid Democracy）は、直接民主主義と代議制民主主義のハイブリッドモデルとして、Blum & Zuber（2016）によって体系的に理論化された。理論的には、専門性の活用と直接参加の保証を両立させる魅力的なモデルである。
+液体民主主義（Liquid Democracy）は、直接民主主義と代議制民主主義のハイブリッドモデルとして、Blum & Zuber [26] によって体系的に理論化された。理論的には、専門性の活用と直接参加の保証を両立させる魅力的なモデルである。
 
-しかし、ドイツ海賊党におけるLiquidFeedbackの実験は、理論と実践の深刻な乖離を露呈した。Kling et al.（2015）の分析は、委任の連鎖が少数の「スーパー投票者」に権力を集中させた事実を明らかにしている。Kahng, Mackenzie, & Procaccia（2021）は、委任の集中がCondorcet Jury Theoremの利点を中和しうることを示した。
+しかし、ドイツ海賊党におけるLiquidFeedbackの実験は、理論と実践の深刻な乖離を露呈した。Kling et al. [27] の分析は、委任の連鎖が少数の「スーパー投票者」に権力を集中させた事実を明らかにしている。Kahng, Mackenzie & Procaccia [28] は、委任の集中がCondorcet Jury Theoremの利点を中和しうることを示した。
 
 液体民主主義の挫折は、PoliTechの設計にとって重要な教訓を含んでいる。理論的に魅力的なモデルであっても、実装段階での制度設計がその理念を裏切りうる。AIエージェントの導入においても、「委任」のメカニズム——市民がどの判断をエージェントに委ね、どの判断を自ら行うか——の設計は、液体民主主義の失敗から学ぶべき点が多い。
 
@@ -232,7 +244,7 @@ AIエージェントの参加を前提とした設計になっているかを評
 - **監査ログ**: エージェントのすべての行動が記録され、事後的に検証可能であるか
 - **MCP（Model Context Protocol）等の標準プロトコル対応**: AIエージェントがプラットフォームと相互運用するための標準化されたインターフェースが提供されているか
 
-この6軸フレームワークは、Patemanの参加型民主主義（第5軸に反映）、Fishkinの熟議民主主義（第4・5軸に反映）、Landemoreのデジタル民主主義（第4軸に反映）、Raymond/Weberのオープンソース理論（第2・3軸に反映）、Barandiaran et al.のテクノポリティクス（全軸の理論的基盤）、Lazar & Cuéllarのエージェント理論（第6軸に反映）を統合するものである。
+この6軸フレームワークは、Patemanの参加型民主主義 [13]（第5軸に反映）、Fishkinの熟議民主主義 [16]（第4・5軸に反映）、Landemoreのデジタル民主主義 [17]（第4軸に反映）、Raymond/Weberのオープンソース理論 [20][21]（第2・3軸に反映）、Barandiaran et al.のテクノポリティクス [22]（全軸の理論的基盤）、Lazar & Cuéllarのエージェント理論 [8]（第6軸に反映）を統合するものである。
 
 ---
 
@@ -242,13 +254,13 @@ AIエージェントの参加を前提とした設計になっているかを評
 
 ### 4.1 台湾：市民ハッカー主導モデル
 
-台湾は、アジアにおけるデジタル民主主義の最先端事例として国際的な注目を集めている。EIUの2024年民主主義指数において、台湾はスコア8.78で世界第12位、アジア第1位にランクされた（EIU, 2025）。その背景には、市民社会のシビックテック運動が先行し、政府がそれを制度化するという「ボトムアップ→制度化」の独自の発展経路がある。
+台湾は、アジアにおけるデジタル民主主義の最先端事例として国際的な注目を集めている。EIUの2024年民主主義指数 [29] において、台湾はスコア8.78で世界第12位、アジア第1位にランクされた。その背景には、市民社会のシビックテック運動が先行し、政府がそれを制度化するという「ボトムアップ→制度化」の独自の発展経路がある。
 
 **g0vからvTaiwanへ。** 台湾のエコシステムの原点は、2012年10月に設立されたg0v（ガブゼロ）コミュニティにある。分散型コミュニティとして設計され、隔月の大規模ハッカソンを中核に、累計39回、7,000名以上の参加者、数百のプロジェクトを生み出してきた。2014年のひまわり運動はg0vの活動を質的に転換させる契機となり、その延長線上に2014年開始のvTaiwanがある。
 
 vTaiwanはPol.isの「ブリッジング・ステートメント」——異なる意見クラスタ間で高い合意を得るステートメント——を特定する機能を核心に据え、分極化を超えた合意形成を技術的に実現した。Uberの規制問題では925名が参加し、145のステートメントに対して31,115票が投じられ、6年間の膠着状態を解決に導いた。2015年から2018年の間に26件の議題が議論され、そのうち80%が何らかの政府アクションにつながった。
 
-**オードリー・タンの制度設計。** タンは「ラディカル・トランスペアレンシー」の実践として全ての公式ロビイング会議の議事録を即日公開し、32省庁70人のイノベーション・オフィサーのネットワークを組織した。COVID-19パンデミック時には、政府がマスク在庫データのAPIを公開し、g0vエンジニアが72時間でマスクマップを開発した事例は、政府とシビックテックの迅速な協働モデルとして国際的に注目された。タンとWeylの共著 *Plurality*（2024）は、台湾の実践を理論的に昇華する試みとして位置づけられる。
+**オードリー・タンの制度設計。** タンは「ラディカル・トランスペアレンシー」の実践として全ての公式ロビイング会議の議事録を即日公開し、32省庁70人のイノベーション・オフィサーのネットワークを組織した。COVID-19パンデミック時には、政府がマスク在庫データのAPIを公開し、g0vエンジニアが72時間でマスクマップを開発した事例は、政府とシビックテックの迅速な協働モデルとして国際的に注目された。TangとWeylの共著 *Plurality* [30] は、台湾の実践を理論的に昇華する試みとして位置づけられる。
 
 **6軸評価。**
 
@@ -269,7 +281,7 @@ vTaiwanはPol.isの「ブリッジング・ステートメント」——異な�
 
 **Democracy ClubとFull Fact。** Democracy Clubは2024年に推定1,400万人が利用し、353/355自治体をカバーした。Full FactはBERTベースのAIパイプラインで日次約33万文を処理し、2024年総選挙で450時間以上のモニタリングを行い約1億3,600万語を分析した。
 
-**透明性パラドックス。** しかし、Sheridan & Reidy（2023）が明らかにしたように、「政党の資金に透明性がある」と同意する国民はわずか15%にとどまる。データの公開は必要条件であるが十分条件ではなく、データの「理解可能性」を高めるためのインターフェース設計——ここにこそAIエージェントの役割がある——が不可欠であることを英国の経験は教えている。
+**透明性パラドックス。** しかし、Sheridan & Reidy [31] が明らかにしたように、「政党の資金に透明性がある」と同意する国民はわずか15%にとどまる。データの公開は必要条件であるが十分条件ではなく、データの「理解可能性」を高めるためのインターフェース設計——ここにこそAIエージェントの役割がある——が不可欠であることを英国の経験は教えている。
 
 **6軸評価。**
 
@@ -309,11 +321,11 @@ vTaiwanはPol.isの「ブリッジング・ステートメント」——異な�
 
 欧州は制度的多様性の中で、地方自治体レベルでの豊富なPoliTech実践を蓄積してきた。
 
-**Decidim（バルセロナ）。** 2016年にローンチされ、2024年時点で30カ国以上、500以上の機関、300万人以上のユーザーを擁する世界最大の参加型民主主義プラットフォーム。Ruby on Railsベースのモジュラー設計、AGPL-3.0ライセンス、Decidim Associationによる独立ガバナンス、Meta-decidimによる再帰的意思決定という設計は、PoliTechの設計原則を最も体現している。ただし、Borge et al.（2023）の実証研究は、Decidimの導入が「管理的な継続性」の要素が強く、熟議や市民への主権移譲よりも管理的効率化に重点が置かれている傾向を指摘している。
+**Decidim（バルセロナ）。** 2016年にローンチされ、2024年時点で30カ国以上、500以上の機関、300万人以上のユーザーを擁する世界最大の参加型民主主義プラットフォーム。Ruby on Railsベースのモジュラー設計、AGPL-3.0ライセンス、Decidim Associationによる独立ガバナンス、Meta-decidimによる再帰的意思決定という設計は、PoliTechの設計原則を最も体現している。ただし、Borge et al. [14] の実証研究は、Decidimの導入が「管理的な継続性」の要素が強く、熟議や市民への主権移譲よりも管理的効率化に重点が置かれている傾向を指摘している。
 
 **CONSUL DemocracyとLLM搭載Civic Assistant。** 250以上の都市・組織に展開されたCONSUL Democracyは、2025年にLLM搭載のオープンソースCivic Assistantの開発を開始した。Google Impact Fundの支援を受けた3カ年プロジェクトとして、音声入力対応、リアルタイム翻訳、AI生成の政策提案構造化等が計画されている。これはPoliTechにおけるAI統合の最前線に位置するが、オープンソースAIの政治的バイアスの問題は今後の実践と研究に委ねられている。
 
-**エストニアのe-Voting。** 2023年3月の国会選挙で全投票の51%がインターネット経由で投じられ、世界初のオンライン投票過半数選挙となった。しかし、Springall et al.（2014）が指摘したセキュリティ上の脆弱性、OSCE/ODIHRによるエンドツーエンド検証可能性の欠如の指摘は、依然として未解決である。エストニアは行政DX（GovTech）の世界最先進事例であるが、PoliTechの観点——政策形成プロセスへの市民参加の質的変革——ではDecidimやvTaiwanとは性格を異にしている。
+**エストニアのe-Voting。** 2023年3月の国会選挙で全投票の51%がインターネット経由で投じられ、世界初のオンライン投票過半数選挙となった。しかし、Springall et al. [32] が指摘したセキュリティ上の脆弱性、OSCE/ODIHRによるエンドツーエンド検証可能性の欠如の指摘は、依然として未解決である。エストニアは行政DX（GovTech）の世界最先進事例であるが、PoliTechの観点——政策形成プロセスへの市民参加の質的変革——ではDecidimやvTaiwanとは性格を異にしている。
 
 **アイスランドのクラウドソーシング憲法。** 国民投票で3分の2の賛成を得ながら議会に拒否されたこの事例は、制度的接合性の失敗事例として最も重要な教訓を提供する。Better Reykjavikは70,000人以上が利用し、毎月10-15件の上位アイデアが市議会に送付される仕組みを持つ。
 
@@ -390,11 +402,22 @@ vTaiwanはPol.isの「ブリッジング・ステートメント」——異な�
 
 **非党派性と非企業性の問題。** これらのツールは本質的に政党に紐づいたツールであり、民主主義のインフラではない。Marumieは自党の政治資金のみを公開し、声が届くマニフェストは自党の政策のみを対象とし、みらい議会は自党の賛否スタンスを併記する。AGPLライセンスにより法的には他党も利用可能だが、他党がチームみらいのブランドとドメイン（team-mir.ai）の下で自党情報を公開するインセンティブは低い。台湾のg0vが「gov.twのoを0に置き換える」という象徴的行為から始まったように、非党派性はライセンスの問題ではなくガバナンス構造・ブランディング・運営主体の独立性を含む総合的な設計の問題である。
 
-### 5.4 OJPP構想——Open Japan Political Platform
+**チームみらいの6軸評価。**
 
-以上の分析から、日本のPoliTechに必要なのは、チームみらい型の「政党発ツール」でもなく、既存のCivicTech組織の漸進的拡張でもなく、**政党にも企業にも依存しないオープンな政治プラットフォーム基盤**——本論文が「OJPP（Open Japan Political Platform）」と呼ぶ構想——の実現である。
+| 軸 | 評価 | 根拠 |
+|---|---|---|
+| 非党派性 | 低い | 政党が開発・運営主体。ツールは自党中心（まる見え政治資金は自党のみ、声が届くマニフェストは自党政策のみ） |
+| 非企業性 | 高い | 政党であり営利企業ではない。AGPL-3.0採用によりコードの商業的囲い込みを制度的に防止 |
+| OSS度 | 高い | GitHub上に38リポジトリ公開、AGPL-3.0一貫採用。日本の政党として例外的 |
+| 制度的接合性 | 中程度 | 2025年参院選で1議席獲得し国会内からの提言が可能に。ただし影響力は限定的 |
+| 包摂性 | 中程度 | AIあんのによる対話型政策説明、ゲーミフィケーション等の工夫あり。テック層に偏重する傾向 |
+| エージェントレディ度 | 中〜高 | AIあんの（党首デジタルツイン）、広聴AI等のAI統合は先進的。API公開は限定的 |
 
-OJPPの設計原則は以下の通りである。
+### 5.4 Open Japan PoliTech Platform構想
+
+以上の分析から、日本のPoliTechに必要なのは、チームみらい型の「政党発ツール」でもなく、既存のCivicTech組織の漸進的拡張でもなく、**政党にも企業にも依存しないオープンな政治プラットフォーム基盤**——本論文が「Open Japan PoliTech Platform」と呼ぶ構想——の実現である。
+
+Open Japan PoliTech Platformの設計原則は以下の通りである。
 
 1. **非党派・非企業の独立財団方式**: Decidim Associationを参考に、特定の政党・企業から独立した法人が運営
 2. **全政党・全政治団体を対象**: 特定の政党のデータだけでなく、全政治アクターのデータを横断的に可視化
@@ -403,7 +426,15 @@ OJPPの設計原則は以下の通りである。
 5. **機械可読な政治データ基盤**: 政治資金、法案、議事録、投票データの構造化・公開
 6. **エージェント認証と監査ログ**: AIエージェントの行動を記録・検証する仕組みの標準装備
 
-DD2030のPolimoneyはこの方向性の萌芽であるが、OJPPはそれを包括的なプラットフォーム基盤として体系化する構想である。
+Open Japan PoliTech Platformは具体的に以下の3つのサービスを核として構成される。
+
+- **MoneyGlass**（政治資金の透明化）——全政党・全政治団体の資金の流れを構造化データとしてAPI提供し、AIエージェントが24時間監視・分析する。「政治資金を、ガラスのように透明に」
+- **PolicyDiff**（政策比較）——全政党のマニフェスト・政策をバージョン管理し、AIエージェントが変更を追跡・差分を可視化する。「全政党の政策を、差分で比較する」
+- **ParliScope**（議会監視）——国会・地方議会の全データをAPI化し、AIエージェントが法案を要約・分析する。「議会を、すべての人とエージェントに開く」
+
+いずれも、政党にも企業にもよらない完全オープンな設計（AGPL-3.0）を採用し、エージェントファーストのAPI-first設計を基本原則とする。
+
+DD2030のPolimoneyはこの方向性の萌芽であるが、Open Japan PoliTech Platformはそれを包括的なプラットフォーム基盤として体系化する構想である。
 
 ### 5.5 6軸評価
 
@@ -432,7 +463,7 @@ AIエージェントの能力が急速に向上する現在、政治インフラ
 
 ### 6.2 エージェントレディ設計の5原則
 
-Lazar & Cuéllar（2025）、Summerfield et al.（2025）、Lazar（2025）の理論的枠組みを踏まえ、エージェントレディなPoliTechインフラの設計原則を以下の5点に定式化する。
+Lazar & Cuéllar [8]、Summerfield et al. [23]、Lazar [24] の理論的枠組みを踏まえ、エージェントレディなPoliTechインフラの設計原則を以下の5点に定式化する。
 
 **原則1：API-first設計——プラットフォームの全機能を機械可読インターフェースで提供する。**
 
@@ -440,7 +471,7 @@ Lazar & Cuéllar（2025）、Summerfield et al.（2025）、Lazar（2025）の�
 
 **原則2：エージェント認証と権限管理——人間とエージェントを区別し、エージェントの行動を制度的に管理する。**
 
-AIエージェントは人間の市民と同じインターフェースを通じてプラットフォームにアクセスするが、その認証は明確に区別されなければならない。エージェントは必ず人間の市民に紐づき、その市民の委任の範囲内でのみ行動できる。Lazar（2025）の「自律性レベル」のフレームワークに基づき、エージェントが許容される行動レベルをプラットフォーム側が制度的に定義する。
+AIエージェントは人間の市民と同じインターフェースを通じてプラットフォームにアクセスするが、その認証は明確に区別されなければならない。エージェントは必ず人間の市民に紐づき、その市民の委任の範囲内でのみ行動できる。Lazar [24] の「自律性レベル」のフレームワークに基づき、エージェントが許容される行動レベルをプラットフォーム側が制度的に定義する。
 
 - **レベル1（情報収集・要約）**: エージェントは政策情報を収集・整理・要約するが、いかなる意思表示も行わない
 - **レベル2（分析・比較）**: エージェントは政策オプションの比較分析、影響評価シミュレーション、利害関係の構造化を行う
@@ -459,7 +490,7 @@ PoliTechプラットフォームに組み込まれるAIモデルは、そのア�
 
 **原則5：コア民主的機能の非委譲——アジェンダ設定、意思形成、最終選択はAIにアウトソースしない。**
 
-Lazar & Cuéllar（2025）が強調するように、民主主義のコア機能——何を議題とするかの決定（アジェンダ設定）、どのような価値判断に基づいて選択するかの形成（意思形成）、最終的にどの選択肢を選ぶかの決定（最終選択）——は、人間の市民に留保されなければならない。AIエージェントは「認知的補助装置」として情報収集・分析・比較を支援するが、何が重要かの判断、何が正しいかの判断、最終的に何を選ぶかの判断は、人間の民主的プロセスの中で行われる。この原則の遵守は、エージェントの自律性レベルの制度的な上限設定として実装される。
+Lazar & Cuéllar [8] が強調するように、民主主義のコア機能——何を議題とするかの決定（アジェンダ設定）、どのような価値判断に基づいて選択するかの形成（意思形成）、最終的にどの選択肢を選ぶかの決定（最終選択）——は、人間の市民に留保されなければならない。AIエージェントは「認知的補助装置」として情報収集・分析・比較を支援するが、何が重要かの判断、何が正しいかの判断、最終的に何を選ぶかの判断は、人間の民主的プロセスの中で行われる。この原則の遵守は、エージェントの自律性レベルの制度的な上限設定として実装される。
 
 ### 6.3 MCP対応とプラットフォーム間相互運用
 
@@ -519,11 +550,11 @@ AIの時代においてこの原則はさらに重要になる。政治プロセ
 
 ### 7.6 AIと政治デジタル化の未来
 
-Stanford HAI（2025）の研究が示すLLMの党派的バイアス、ワシントン大学（2025）が実証したAIチャットボットによる政治的見解のシフト効果は、AIの政治プロセスへの導入における根本的課題を示している。
+Stanford HAIの研究 [3] が示すLLMの党派的バイアス、ワシントン大学の研究 [4] が実証したAIチャットボットによる政治的見解のシフト効果は、AIの政治プロセスへの導入における根本的課題を示している。
 
-Summerfield et al.（2025）がNature Human Behaviourで論じたように、先進的AIシステムは民主主義に対してポジティブにもネガティブにも作用しうる。AIが市民の政策理解を深め、参加障壁を下げ、合意点を可視化する可能性は現実的である。同時に、AIによる世論操作、情報環境の劣化、政治参加パターンの歪曲というリスクも現実的である。
+Summerfield et al. [23] がNature Human Behaviourで論じたように、先進的AIシステムは民主主義に対してポジティブにもネガティブにも作用しうる。AIが市民の政策理解を深め、参加障壁を下げ、合意点を可視化する可能性は現実的である。同時に、AIによる世論操作、情報環境の劣化、政治参加パターンの歪曲というリスクも現実的である。
 
-この二面性に対する制度的回答が、本論文が提示したエージェントレディ設計の5原則である。オードリー・タンの「アラインメント・アセンブリ」構想——AIガバナンスを市民の集合知で行うモデル——と、Kuo & Nolan（2022）の「民主的AI」概念は、AIの設計そのものを民主的プロセスに委ねるという方向性を示している。PoliTechは、この方向性を技術的・制度的に具体化する枠組みである。
+この二面性に対する制度的回答が、本論文が提示したエージェントレディ設計の5原則である。オードリー・タンの「アラインメント・アセンブリ」構想——AIガバナンスを市民の集合知で行うモデル——と、Kuo & Nolan [25] の「民主的AI」概念は、AIの設計そのものを民主的プロセスに委ねるという方向性を示している。PoliTechは、この方向性を技術的・制度的に具体化する枠組みである。
 
 ### 7.7 限界と今後の課題
 
@@ -537,130 +568,168 @@ Summerfield et al.（2025）がNature Human Behaviourで論じたように、先
 
 第四に、PoliTechという概念の定義自体が本論文の提案であり、学術コミュニティにおける検証と精緻化を必要とする。GovTech・CivicTechとの境界線は、実践の中で常に再交渉される動態的なものであり、本論文の概念整理はその出発点にすぎない。
 
-今後の研究課題として、以下が挙げられる。(1) エージェントレディ設計原則のプロトタイプ実装と評価、(2) AIの政治的バイアスのオープンソースモデルにおける低減手法の開発、(3) PoliTechプラットフォームの利用者層の実証分析（デジタルデバイドの定量的評価）、(4) 日本のOJPP構想の具体的な制度設計と法制度的条件の検討、(5) エージェントの政治的行動の倫理的フレームワークの構築。
+今後の研究課題として、以下が挙げられる。(1) エージェントレディ設計原則のプロトタイプ実装と評価、(2) AIの政治的バイアスのオープンソースモデルにおける低減手法の開発、(3) PoliTechプラットフォームの利用者層の実証分析（デジタルデバイドの定量的評価）、(4) 日本のOpen Japan PoliTech Platform構想の具体的な制度設計と法制度的条件の検討、(5) エージェントの政治的行動の倫理的フレームワークの構築。
 
 ---
 
-## 8. 結論——PoliTechの提言
+## 8. 提言——PoliTechマニフェスト
 
-本論文は、政治のデジタル化をGovTech（行政技術）・CivicTech（市民技術）から区分された第三の概念——PoliTech（政治技術）——として定式化し、台湾、英国、米国、欧州、日本の5地域の国際比較を通じて、非党派的・非企業的・オープンソースかつエージェントレディな政治インフラの設計原則を導出した。
+本論文は、ポジションペーパーとして以下を宣言する。
 
-分析の結果、以下の知見が得られた。
+政治のデジタル化は、GovTech（行政技術）でもCivicTech（市民技術）でもない第三の領域——PoliTech（政治技術）——として独立に構想されなければならない。台湾、英国、米国、欧州、日本の5地域の国際比較が明らかにしたのは、**政党にも企業にもよらない、オープンソースかつエージェントレディな政治インフラ**だけが、民主主義のデジタル基盤として信頼に足るという事実である。
 
-**第一に、GovTech・CivicTech・PoliTechの三概念区分は、各国の政治デジタル化の到達点と欠落を正確に診断する分析枠組みとして有効である。** エストニアがe-Votingで世界最先端のGovTechを実現しながらPoliTech領域では限定的であること、英国がCivicTechのエコシステムを成熟させながらPoliTech（意思決定メカニズムの変革）では台湾やバルセロナに及ばないこと、日本がGovTechのみ進展しCivicTech・PoliTechが構造的に欠落していること——これらの診断は、三概念の区分によってはじめて明瞭になる。
+### 8.1 4つの原則的主張
 
-**第二に、非党派性に加えて非企業性が民主主義インフラの信頼性の前提条件である。** 政党に任せると党派性バイアスが入り、企業に任せると利益相反が入る。台湾のg0vとバルセロナのDecidim Associationが示すように、非党派性と非企業性の両方が高い場合にプラットフォームの信頼性と持続性が最も高くなる。AGPLライセンスの採用、コミュニティ主導のガバナンス、多元的な資金モデルが、非企業性を制度的に保証する鍵である。
+**第一：GovTech・CivicTech・PoliTechの三概念区分を確立する。** エストニアがe-Votingで世界最先端のGovTechを実現しながらPoliTech領域では限定的であること、英国がCivicTechを成熟させながら意思決定メカニズムの変革では台湾やバルセロナに及ばないこと、日本がGovTechのみ進展しPoliTechが構造的に欠落していること——これらは三概念の区分によってはじめて可視化される。行政DXの進展は政治の変革ではない。この混同を許さないことが出発点である。
 
-**第三に、AIエージェントの政治プロセスへの参入を前提とした「エージェントレディ」設計が、今後の政治インフラの不可避な要件である。** エージェントレディ設計なしには、管理されないエージェントの非公式介入、情報格差の固定化、民主的統制の欠如という三重の問題に直面する。本論文が提示した5原則——API-first設計、エージェント認証と権限管理、完全監査ログ、オープンソースAIの義務化、コア民主的機能の非委譲——は、この問題への体系的な制度設計の提案である。
+**第二：非党派性と非企業性の双方を制度的に保証する。** 政党に任せれば党派性バイアスが入り、企業に任せれば利益相反が入る。台湾のg0vとバルセロナのDecidim Associationが証明したように、非党派性と非企業性が同時に高い場合にのみ、プラットフォームの信頼性と持続性は担保される。AGPLライセンスの採用、コミュニティ主導のガバナンス、多元的な資金モデルは、この原則の制度的表現である。
 
-**第四に、制度的接合なしにPoliTechは成功しない。** アイスランドの挫折は、市民参加の正統性と既存制度の拒否権の緊張を象徴している。テクノロジーの開発と並行して、制度的接合点の設計が不可欠である。
+**第三：AIエージェントの政治プロセスへの参入を前提として設計する。** エージェントレディ設計なしには、管理されないエージェントの非公式介入、情報格差の固定化、民主的統制の欠如という三重の問題が不可避となる。本論文が提示した5原則——API-first設計、エージェント認証と権限管理、完全監査ログ、オープンソースAIの義務化、コア民主的機能の非委譲——は、AIエージェント時代の民主主義インフラの最低要件である。
 
-以上を踏まえ、日本への提言として以下の5点を提示する。
+**第四：制度的接合なしにPoliTechは実現しない。** アイスランドのクラウドソーシング憲法が国民投票で3分の2の賛成を得ながら議会に拒否された教訓は明確である。テクノロジーだけでは政治は変わらない。テクノロジーの開発と並行した制度的接合点の設計が不可欠である。
 
-**提言1：FEC型の包括的政治データ基盤の構築。** 全政党・全政治団体を対象とし、構造化データをAPI（REST/GraphQL）で提供し、無期限に保存する独立データ基盤の整備。2028年に予定されている総務省のデータベースを拡充し、エージェントレディな機械可読データ基盤へと発展させる。
+### 8.2 日本への5つの提言
 
-**提言2：OJPP（Open Japan Political Platform）の実現。** チームみらいの技術的成果を参照しつつも、政党にも企業にも依存しない独立財団方式のオープンな政治プラットフォーム基盤を構築する。全政党の政治資金可視化、マニフェスト比較、国会審議データのAPI提供を包括的に実現する。
+以上の原則に基づき、日本のPoliTech構築に向けた具体的提言を行う。
 
-**提言3：国会APIの法制化。** 英国議会のapi.parliament.ukを参考に、議員情報、法案データ、投票データ、委員会情報、政治資金データをREST APIとして公開することを法的に義務化する。これはエージェントレディな政治インフラの最も基本的な前提条件である。
+**提言1：FEC型の包括的政治データ基盤を構築せよ。** 全政党・全政治団体を対象とし、構造化データをAPI（REST/GraphQL）で提供し、無期限に保存する独立データ基盤を整備する。2028年に予定されている総務省のデータベースを拡充し、エージェントレディな機械可読データ基盤へと発展させる。全政治団体の約5%しか対象としない現行の改正政治資金規正法の射程を、100%にまで拡大する。
 
-**提言4：エージェントレディ設計のプロトタイプ実装。** 本論文が提示した5原則に基づくプロトタイプを、Decidimやいどばた等の既存プラットフォームの拡張として実装し、実証的に検証する。
+**提言2：Open Japan PoliTech Platformを実現せよ。** チームみらいの技術的成果を参照しつつも、政党にも企業にも依存しない独立財団方式のオープンな政治プラットフォーム基盤を構築する。MoneyGlass（全政党の政治資金可視化）、PolicyDiff（全政党のマニフェスト差分比較）、ParliScope（国会・地方議会の全データAPI化）を三本柱として、AIエージェントが全法案を読み、全政治資金を監視し、全政策の変更を追跡する——人間が見ていなくても、エージェントが見ている——という新しい民主主義の監視モデルを構築する。
 
-**提言5：PoliTech人材の育成と制度的経路の整備。** 台湾モデル（市民社会→政府への人材浸透）と英国モデル（政府によるデータ開放）を参照しつつ、日本の制度的文脈に適合した接合点を設計する。シビックテック人材の政策過程への参加を促す制度的経路の整備が含まれる。
+**提言3：国会APIを法制化せよ。** 英国議会のapi.parliament.ukを参考に、議員情報、法案データ、投票データ、委員会情報、政治資金データをREST APIとして公開することを法的に義務化する。これはエージェントレディな政治インフラの最も基本的な前提条件であり、この基盤なしにはいかなるPoliTechも砂上の楼閣に終わる。
 
-政治のデジタル化のために、デジタル議席を取る必要は必ずしもない。チームみらいの試みは一つの有効な経路であるが、民主主義のインフラは特定の政党の所有物であっても、特定の企業のサービスであってもならない。台湾のg0vが市民ハッカーコミュニティとして政治のデジタル化を実現し、バルセロナのDecidim Associationがデジタルコモンズとして参加型民主主義の基盤を構築したように、PoliTechのインフラは市民社会の手によって、全ての政治的立場に対して中立に、全ての企業的利害から独立して、AIエージェントの参入を前提とした設計のもとで、オープンソースの原則に基づいて構築されうる。その可能性を示し、その設計原則を定式化することが、本論文の結論である。
+**提言4：エージェントレディ設計のプロトタイプを実装せよ。** 本論文が提示した5原則に基づくプロトタイプを、Open Japan PoliTech Platformとして実装し、実証的に検証する。理論的提案にとどまらず、動くコードとして世に問う。
+
+**提言5：PoliTech人材の育成と制度的経路を整備せよ。** 台湾モデル（市民社会→政府への人材浸透）と英国モデル（政府によるデータ開放）を参照しつつ、日本の制度的文脈に適合した接合点を設計する。政治のデジタル化のために、デジタル議席を取る必要は必ずしもない。しかし、市民社会の中にPoliTechの担い手を育て、制度への接合経路を開くことは不可欠である。
+
+### 8.3 宣言
+
+民主主義のインフラは、特定の政党の所有物であってはならない。特定の企業のサービスであってもならない。
+
+台湾のg0vが市民ハッカーコミュニティとして政治のデジタル化を実現し、バルセロナのDecidim Associationがデジタルコモンズとして参加型民主主義の基盤を構築したように、PoliTechのインフラは——政党にも企業にもよらず——市民社会の手によって、全ての政治的立場に対して中立に、全ての企業的利害から独立して、AIエージェントの参入を前提とした設計のもとで、オープンソースの原則に基づいて構築されなければならない。
+
+AIエージェント時代の到来は、この課題をより緊急なものにしている。エージェントが全法案を読み、全政治資金を追跡し、全政策の変更を監視する時代において、そのエージェントが依拠するインフラが党派的であること、企業のプロプライエタリなサービスであること、あるいはそもそも存在しないことは、民主主義にとっての構造的リスクである。
+
+本論文は、このリスクに対する設計原則を提示し、その具体的実装としてOpen Japan PoliTech Platformを提唱する。政党にも企業にもよらない、完全オープンな政治テクノロジー基盤——それが、AIエージェント時代の民主主義が必要とするインフラである。
 
 ---
 
-## 参考文献
+## 引用文献
 
-### PoliTech概念・三概念整理
+[1] Eurobarometer. (2024). *Standard Eurobarometer 101*. European Commission.
 
-- GovOcal. (2023). "What's the Difference Between Civic Tech and GovTech?" https://www.govocal.com/blog/difference-civic-tech-govtech
+[2] Pew Research Center. (2023). "Public Trust in Government: 1958-2023." https://www.pewresearch.org/
 
-### AIエージェントと民主主義
+[3] Hall, A. et al. (2025). "Study finds perceived political bias in popular AI models." *Stanford Report*. https://news.stanford.edu/stories/2025/05/ai-models-llms-chatgpt-claude-gemini-partisan-bias-research-study
 
-- Lazar, S. & Cuéllar, M.-F. (2025). "AI Agents and Democratic Resilience." Knight First Amendment Institute at Columbia University / Carnegie Endowment for International Peace.
-- Summerfield, C., Argyle, L.P. et al. (2025). "The Impact of Advanced AI Systems on Democracy." *Nature Human Behaviour*.
-- Kuo, M.A. & Nolan, H.C. (2022). "Human-centred mechanism design with Democratic AI." *Nature Human Behaviour*.
-- Lazar, S. (2025). "Levels of Autonomy for AI Agents." arXiv:2506.12469.
-- Hall, A. et al. (2025). "Study finds perceived political bias in popular AI models." *Stanford Report*. https://news.stanford.edu/stories/2025/05/ai-models-llms-chatgpt-claude-gemini-partisan-bias-research-study
+[4] University of Washington. (2025). "Biased AI chatbots swayed people's political views." https://www.washington.edu/news/2025/08/06/biased-ai-chatbots-swayed-peoples-political-views/
+
+[5] Haugen, F. (2021). Testimony before U.S. Senate Committee on Commerce, Science, and Transportation.
+
+[6] GovOcal. (2023). "What's the Difference Between Civic Tech and GovTech?" https://www.govocal.com/blog/difference-civic-tech-govtech
+
+[7] Kerikmäe, T. & Rull, A. (2016). *The Future of Law and eTechnologies*. Springer.
+
+[8] Lazar, S. & Cuéllar, M.-F. (2025). "AI Agents and Democratic Resilience." Knight First Amendment Institute at Columbia University / Carnegie Endowment for International Peace.
+
+[9] Badouard, R., Mabi, C. & Monnoyer-Smith, L. (2017). "Can the French Republic Be Digital?" In *Participation, Privacy, and Power*, Springer.
+
+[10] MIT Center for Civic Media. (2014). "The Difference Between Political Tech and Civic Tech." MIT Media Lab.
+
+[11] 落合陽一. (2019). 『日本進化論——人口減少は史上稀なるチャンスだ！』SBクリエイティブ（SB新書）. ※2018年7月31日ニコニコ生放送「平成最後の夏期講習（社会科編）——人生100年時代の社会保障とPoliTech」（落合陽一×小泉進次郎）に基づく.
+
+[12] Wilson, A. (2023). *Political Technology: The Globalisation of Political Manipulation*. Cambridge University Press.
+
+[13] Pateman, C. (1970). *Participation and Democratic Theory*. Cambridge University Press.
+
+[14] Borge, R., Balcells, J. & Padró-Solanet, A. (2023). "Democratic Disruption or Continuity? The Transformative Uses of Information and Communication Technologies in Catalan Municipalities." *American Behavioral Scientist*, 67(7).
+
+[15] Barber, B. (1984). *Strong Democracy: Participatory Politics for a New Age*. University of California Press.
+
+[16] Fishkin, J.S. (2009). *When the People Speak: Deliberative Democracy and Public Consultation*. Oxford University Press.
+
+[17] Landemore, H. (2021). "Open Democracy and Digital Technologies." In Bernholz, L., Landemore, H. & Reich, R. (eds.), *Digital Technology and Democratic Theory*. University of Chicago Press.
+
+[18] Landemore, H. (2015). "Inclusive Constitution-Making: The Icelandic Experiment." *Journal of Political Philosophy*, 23(2), 166-191.
+
+[19] Simon, J., Bass, T., Boelman, V. & Mulgan, G. (2017). "Digital Democracy: The Tools Transforming Political Engagement." Nesta.
+
+[20] Raymond, E.S. (1999). *The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary*. O'Reilly Media.
+
+[21] Weber, S. (2004). *The Success of Open Source*. Harvard University Press.
+
+[22] Barandiaran, X.E., Calleja-Lopez, A., Monterde, A. & Romero, C. (2024). *Decidim, a Technopolitical Network for Participatory Democracy: Philosophy, Practice and Autonomy of a Collective Platform in the Age of Digital Intelligence*. Springer. (Open Access)
+
+[23] Summerfield, C., Argyle, L.P. et al. (2025). "The Impact of Advanced AI Systems on Democracy." *Nature Human Behaviour*.
+
+[24] Lazar, S. (2025). "Levels of Autonomy for AI Agents." arXiv:2506.12469.
+
+[25] Kuo, M.A. & Nolan, H.C. (2022). "Human-centred mechanism design with Democratic AI." *Nature Human Behaviour*.
+
+[26] Blum, C. & Zuber, C.I. (2016). "Liquid Democracy: Potentials, Problems, and Perspectives." *The Journal of Political Philosophy*, 24(2), 162-182.
+
+[27] Kling, C.C. et al. (2015). "Voting Behaviour and Power in Online Democracy: A Study of LiquidFeedback in Germany's Pirate Party." *Proceedings of ICWSM*. arXiv:1503.07723.
+
+[28] Kahng, A., Mackenzie, S. & Procaccia, A.D. (2021). "The Fluid Mechanics of Liquid Democracy." *ACM Transactions on Economics and Computation*, 9(4).
+
+[29] Economist Intelligence Unit. (2025). *Democracy Index 2024: The Age of Conflict*.
+
+[30] Tang, A. & Weyl, E.G. (2024). *⿻ 數位 Plurality: The Future of Collaborative Technology and Democracy*. RadicalxChange Foundation.
+
+[31] Sheridan & Reidy. (2023). "Public Understanding of Electoral Spending." *Representation*, Taylor & Francis.
+
+[32] Springall, D. et al. (2014). "Security Analysis of the Estonian Internet Voting System." *Proceedings of ACM CCS '14*.
+
+---
+
+### 補足文献
+
+**AIと政治**
+
 - Stanford HAI. (2025). "Toward Political Neutrality in AI." https://hai.stanford.edu/policy/toward-political-neutrality-in-ai
-- University of Washington. (2025). "Biased AI chatbots swayed people's political views." https://www.washington.edu/news/2025/08/06/biased-ai-chatbots-swayed-peoples-political-views/
-- Brookings Institution. "Is the politicization of generative AI inevitable?" https://www.brookings.edu/articles/is-the-politicization-of-generative-ai-inevitable/
 - Stanford HAI. (2025). *AI Index Report 2025*. https://hai.stanford.edu/ai-index/2025-ai-index-report/responsible-ai
+- Brookings Institution. "Is the politicization of generative AI inevitable?" https://www.brookings.edu/articles/is-the-politicization-of-generative-ai-inevitable/
 - Reboot Democracy AI. "Audrey Tang: Alignment Assemblies." https://rebootdemocracy.ai/blog/audrey-tang-ai-democracy/
 
-### 台湾
+**台湾**
 
-- Hsiao, Y.-T., Lin, S.-Y., Tang, A., Narayanan, D., & Sarahe, C. (2018). "vTaiwan: An Empirical Study of Open Consultation Process in Taiwan." *SocArXiv*. DOI: 10.31235/osf.io/xyhft.
+- Hsiao, Y.-T., Lin, S.-Y., Tang, A., Narayanan, D. & Sarahe, C. (2018). "vTaiwan: An Empirical Study of Open Consultation Process in Taiwan." *SocArXiv*. DOI: 10.31235/osf.io/xyhft.
 - Lee, C.-T. (2020). "Free the Data from the Birdcage: Opening Up Data and Crowdsourcing Activism in Taiwan." *PoLAR*, 43(2), 247-263.
 - Siddarth, D. (2020). "Taiwan: Grassroots Digital Democracy That Works." *RadicalxChange Foundation*.
-- Tang, A., & Weyl, E. G. (2024). *⿻ 數位 Plurality: The Future of Collaborative Technology and Democracy*. RadicalxChange Foundation.
 - Ho, M.-s. (2023). "Exploring Worldwide Democratic Innovations: A Case Study of Taiwan." *European Partnership for Democracy*.
 - Bridging Voting and Deliberation with Algorithms: Field Insights from vTaiwan and Kultur Komitee. (2025). *Proceedings of ACM FAccT*. DOI: 10.1145/3715275.3732205.
 - Aviv, R. et al. (2022). "Bridging-Based Ranking." *Belfer Center, Harvard Kennedy School*.
-- Cheng, T.-Y. (2017). "Keyboard Participation: A Case Study of 'G0v.Tw'." Master's thesis, National Taiwan University.
 - g0v Jothon. (n.d.). "g0v Hackathon." https://jothon.g0v.tw/
-- CrowdLaw for Congress. (n.d.). "vTaiwan." https://congress.crowd.law/case-vtaiwan.html
-- MIT Technology Review. (2018). "Inside Taiwan's new digital democracy."
 
-### 英国
+**英国**
 
 - mySociety. (2025). "Impact Report 2024-25." https://research.mysociety.org/html/impact-report-2025/
-- mySociety. (2015). "Who Benefits From Civic Technology?" https://research.mysociety.org/html/who-benefits/
 - Government Digital Service. (2012, updated). "Government Design Principles." GOV.UK.
 - Democracy Club. (2024). "2024 Local and General Elections Report."
 - Full Fact. (2025). "Full Fact AI." https://fullfact.org/ai/
-- Full Fact. (2025). "Full Fact Report 2025."
-- Sheridan & Reidy. (2023). "Public Understanding of Electoral Spending." *Representation*, Taylor & Francis.
-- Simon, J., Bass, T., Boelman, V. & Mulgan, G. (2017). "Digital Democracy." Nesta.
 - Nesta. (2023-2025). "COLDIGIT: Collective Intelligence through Digital Tools."
 - Margetts, H., John, P., Hale, S. & Yasseri, T. (2016). *Political Turbulence*. Princeton University Press.
-- Westminster Foundation for Democracy. (2024-2025). "Using Digital Technology for Democratic Resilience."
-- Electoral Commission. "Political Finance Online."
 
-### 米国
+**米国**
 
 - Code for America. (2024). "2024 Impact Report."
 - OpenSecrets. https://www.opensecrets.org/
 - FEC. "Campaign Finance Data." https://www.fec.gov/data/
 - OpenFEC API Documentation. https://api.open.fec.gov/developers/
-- ProPublica Congress API. https://projects.propublica.org/api-docs/congress-api/
-- 18F. "Open Source Policy." https://18f.gsa.gov/open-source-policy/
-- USDS. (2024). "2024 Impact Report."
 - Tauberer, J. (2012). *Open Government Data: The Book*.
-- McNutt, J.G. et al. (2016). "The diffusion of civic technology and open government in the United States." *Information Polity*, 21(2), 153-170.
-- Graeff, E. (2018). "Evaluating Civic Technology Design for Citizen Empowerment." MIT PhD Thesis.
-- Knight Foundation. (2013). "The Emergence of Civic Tech."
-- Haugen, F. (2021). Testimony before U.S. Senate Committee on Commerce, Science, and Transportation.
 
-### 欧州
+**欧州**
 
-- Barandiaran, X. E., Calleja-Lopez, A., Monterde, A., & Romero, C. (2024). *Decidim, a Technopolitical Network for Participatory Democracy*. Springer. (Open Access)
-- Borge, R., Balcells, J., & Padro-Solanet, A. (2023). "Democratic Disruption or Continuity?" *American Behavioral Scientist*, 67(7).
-- Blum, C., & Zuber, C. I. (2016). "Liquid Democracy." *The Journal of Political Philosophy*, 24(2), 162-182.
-- Kling, C. C. et al. (2015). "Voting Behaviour and Power in Online Democracy." *ICWSM*. arXiv:1503.07723
-- Kahng, A., Mackenzie, S., & Procaccia, A. D. (2021). "The Fluid Mechanics of Liquid Democracy." *ACM TEAC*, 9(4).
-- Landemore, H. (2015). "Inclusive Constitution-Making: The Icelandic Experiment." *Journal of Political Philosophy*, 23(2), 166-191.
-- Landemore, H. (2021). "Open Democracy and Digital Technologies." In Bernholz, Landemore & Reich (eds.), *Digital Technology and Democratic Theory*.
-- Badouard, R., Mabi, C., & Monnoyer-Smith, L. (2017). "Can the French Republic Be Digital?" In *Participation, Privacy, and Power*, Springer.
-- Solvak, M., & Vassil, K. (2016). *E-voting in Estonia*. University of Tartu.
-- Springall, D. et al. (2014). "Security Analysis of the Estonian Internet Voting System." *ACM CCS '14*.
+- Solvak, M. & Vassil, K. (2016). *E-voting in Estonia: Technological Diffusion and Other Developments Over Ten Years*. University of Tartu.
 - Consul Democracy. https://consuldemocracy.org/
 - Decidim. https://decidim.org/
 
-### 理論
+**理論**
 
-- Pateman, C. (1970). *Participation and Democratic Theory*. Cambridge University Press.
-- Barber, B. (1984). *Strong Democracy*. University of California Press.
-- Fishkin, J. S. (2009). *When the People Speak*. Oxford University Press.
-- Fishkin, J. S. (2011). *When the People Speak: Deliberative Democracy and Public Consultation*. (Updated edition).
-- Raymond, E. S. (1999). *The Cathedral and the Bazaar*. O'Reilly Media.
-- Weber, S. (2004). *The Success of Open Source*. Harvard University Press.
+- Fishkin, J.S. (2011). *When the People Speak: Deliberative Democracy and Public Consultation*. (Updated edition). Oxford University Press.
 - Bernholz, L., Landemore, H. & Reich, R. (eds.). (2021). *Digital Technology and Democratic Theory*. University of Chicago Press.
-- Kerikmäe, T., & Rull, A. (2016). *The Future of Law and eTechnologies*. Springer.
 
-### 日本
+**日本**
 
 - デジタル庁. https://www.digital.go.jp/
 - 総務省. "政治資金収支報告書." https://www.soumu.go.jp/senkyo/seiji_s/seijishikin/
@@ -671,19 +740,12 @@ Summerfield et al.（2025）がNature Human Behaviourで論じたように、先
 - チームみらいGitHub. https://github.com/team-mirai
 - デジタル民主主義2030. https://dd2030.org/
 - 山田健太, 青田雅輝, 並木亮, 横山源太朗. (2023). "政治資金収支報告書のOCRによる政治資金データベースへの試み." *JSAI 2023*.
-- 日経クロステック. "政治資金はDB化するも対象は5%."
-- 経済同友会. (2025). "政治資金の徹底した透明化を."
 - Code for Japan. https://www.code4japan.org/
 
-### 国際比較・その他
+**国際比較・その他**
 
-- OECD OPSI. Observatory of Public Sector Innovation. https://oecd-opsi.org/
 - OECD. (2025). "Tackling Civic Participation Challenges with Emerging Technologies."
+- International IDEA. (2024). "Digital Technologies Become a Strong Factor in Democracy."
 - Participedia. https://participedia.net/
 - People Powered. https://www.peoplepowered.org/
 - Democracy Technologies Database. https://democracy-technologies.org/database/
-- International IDEA. (2024). "Digital Technologies Become a Strong Factor in Democracy."
-- Economist Intelligence Unit. (2025). *Democracy Index 2024*.
-- Eurobarometer. (2024). Standard Eurobarometer 101.
-- Pew Research Center. (2023). "Public Trust in Government."
-- "Citizen participation and technology." (2025). *Humanities and Social Sciences Communications*, Nature.
