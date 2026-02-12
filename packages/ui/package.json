@@ -1,5 +1,5 @@
 {
-  "name": "@open-civic/ui",
+  "name": "@ojpp/ui",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.ts",

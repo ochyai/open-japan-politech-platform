@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OpenGikai Admin - 管理画面",
-  description: "OpenGikai管理画面 - 法案データ・議論の管理",
+  title: "PoliGikai Admin - 管理画面",
+  description: "PoliGikai管理画面 - 法案データ・議論の管理",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div className="flex">
           <aside className="w-64 min-h-screen border-r bg-white p-6">
             <h1 className="mb-8 text-lg font-bold">
-              <span className="text-purple-600">Open</span>Gikai
+              <span className="text-purple-600">Poli</span>Gikai
               <span className="ml-2 text-xs text-gray-400">Admin</span>
             </h1>
             <nav className="space-y-2 text-sm">
