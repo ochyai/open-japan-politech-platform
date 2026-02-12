@@ -12,15 +12,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
         <header className="border-b bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <h1 className="text-xl font-bold">
+            <a href="/" className="text-xl font-bold">
               <span className="text-green-600">Policy</span>Diff
-            </h1>
+            </a>
             <nav className="flex gap-6 text-sm">
-              <a href="/" className="hover:text-green-600">政策一覧</a>
+              <a href="/" className="hover:text-green-600">ダッシュボード</a>
+              <a href="/category/教育" className="hover:text-green-600">カテゴリ別</a>
               <a href="/compare" className="hover:text-green-600">政党比較</a>
-              <a href="/propose" className="hover:text-green-600">政策を提案する</a>
-              <a href="/api" className="hover:text-green-600">API</a>
-              <a href="/about" className="hover:text-green-600">このサービスについて</a>
+              <a href="/proposals" className="hover:text-green-600">提案</a>
+              <a href="/api-docs" className="hover:text-green-600">API</a>
+              <a href="/about" className="hover:text-green-600">About</a>
             </nav>
           </div>
         </header>

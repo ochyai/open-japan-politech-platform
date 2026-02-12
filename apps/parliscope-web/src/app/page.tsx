@@ -1,54 +1,97 @@
-export default function Home() {
+import { prisma } from "@ojpp/db";
+import { Card, Stat } from "@ojpp/ui";
+import { BillStatusBadge } from "@/components/bill-status-badge";
+
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [billCount, politicianCount, sessionCount, enactedCount, recentBills, statusCounts] =
+    await Promise.all([
+      prisma.bill.count(),
+      prisma.politician.count(),
+      prisma.dietSession.count(),
+      prisma.bill.count({ where: { status: "ENACTED" } }),
+      prisma.bill.findMany({
+        take: 10,
+        orderBy: { submittedAt: "desc" },
+        include: { session: true },
+      }),
+      prisma.bill.groupBy({
+        by: ["status"],
+        _count: { id: true },
+      }),
+    ]);
+
+  const statusMap: Record<string, number> = {};
+  for (const item of statusCounts) {
+    statusMap[item.status] = item._count.id;
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-6 py-12">
       <section className="mb-12">
-        <h2 className="mb-4 text-3xl font-bold">国会で何が議論されているか、知ろう</h2>
-        <p className="mb-8 max-w-2xl text-lg text-gray-600">
-          OpenGikaiは、国会・地方議会の法案を分かりやすく可視化し、
-          市民が議論に参加できるオープンソースプラットフォームです。
+        <h2 className="mb-2 text-3xl font-bold">ParliScope</h2>
+        <p className="mb-8 text-gray-600">
+          国会の法案・会期・議員データを可視化するオープンプラットフォーム
         </p>
-        <div className="grid gap-6 md:grid-cols-3">
-          <FeatureCard
-            title="法案の可視化"
-            description="難解な法案をAIが要約。賛否の論点を分かりやすく整理。"
-            color="purple"
-          />
-          <FeatureCard
-            title="模擬審議"
-            description="市民が法案について議論し、賛否を表明。模擬投票で世論を可視化。"
-            color="purple"
-          />
-          <FeatureCard
-            title="議員の活動追跡"
-            description="各議員の投票行動・発言・出席率を横断的に比較。"
-            color="purple"
-          />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Stat label="法案数" value={billCount} />
+          <Stat label="議員数" value={politicianCount} />
+          <Stat label="成立法案" value={enactedCount} />
+          <Stat label="会期数" value={sessionCount} />
         </div>
       </section>
 
       <section className="mb-12">
-        <h3 className="mb-6 text-2xl font-bold">現在審議中の法案</h3>
-        <div className="rounded-lg border bg-white p-8 text-center text-gray-500">
-          <p className="text-lg">国会APIからデータを取得中...</p>
-          <p className="mt-2 text-sm">衆議院・参議院の法案データを自動収集します。</p>
+        <h3 className="mb-4 text-xl font-bold">ステータス別法案数</h3>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {Object.entries(statusMap).map(([status, count]) => (
+            <Card key={status} padding="sm">
+              <div className="flex items-center justify-between">
+                <BillStatusBadge status={status} />
+                <span className="text-lg font-bold">{count}</span>
+              </div>
+            </Card>
+          ))}
         </div>
       </section>
 
       <section>
-        <h3 className="mb-6 text-2xl font-bold">最近の議論</h3>
-        <div className="rounded-lg border bg-white p-8 text-center text-gray-500">
-          <p>まだ議論がありません。法案ページから議論を始めましょう。</p>
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-xl font-bold">最新の法案</h3>
+          <a href="/bills" className="text-sm text-purple-600 hover:underline">
+            すべて見る
+          </a>
+        </div>
+        <div className="space-y-3">
+          {recentBills.map((bill) => (
+            <Card key={bill.id} padding="sm">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0 flex-1">
+                  <div className="mb-1 flex items-center gap-2">
+                    <span className="text-xs text-gray-500">{bill.number}</span>
+                    <BillStatusBadge status={bill.status} />
+                    {bill.category && (
+                      <span className="rounded bg-purple-50 px-2 py-0.5 text-xs text-purple-700">
+                        {bill.category}
+                      </span>
+                    )}
+                  </div>
+                  <a href={`/bills/${bill.id}`} className="font-semibold hover:text-purple-600">
+                    {bill.title}
+                  </a>
+                  {bill.summary && (
+                    <p className="mt-0.5 text-sm text-gray-600 line-clamp-1">{bill.summary}</p>
+                  )}
+                </div>
+                <span className="shrink-0 text-xs text-gray-400">
+                  第{bill.session.number}回国会
+                </span>
+              </div>
+            </Card>
+          ))}
         </div>
       </section>
-    </div>
-  );
-}
-
-function FeatureCard({ title, description, color }: { title: string; description: string; color: string }) {
-  return (
-    <div className="rounded-lg border bg-white p-6 shadow-sm">
-      <h4 className="mb-2 text-lg font-semibold">{title}</h4>
-      <p className="text-sm text-gray-600">{description}</p>
     </div>
   );
 }

@@ -15,20 +15,22 @@ export default function RootLayout({
         <header className="border-b bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <h1 className="text-xl font-bold">
-              <span className="text-blue-600">Money</span>Glass
+              <a href="/">
+                <span className="text-blue-600">Money</span>Glass
+              </a>
             </h1>
             <nav className="flex gap-6 text-sm">
               <a href="/" className="hover:text-blue-600">ダッシュボード</a>
-              <a href="/politicians" className="hover:text-blue-600">政治家一覧</a>
+              <a href="/organizations" className="hover:text-blue-600">団体一覧</a>
               <a href="/parties" className="hover:text-blue-600">政党別</a>
-              <a href="/api" className="hover:text-blue-600">API</a>
-              <a href="/about" className="hover:text-blue-600">このサービスについて</a>
+              <a href="/api-docs" className="hover:text-blue-600">API</a>
+              <a href="/about" className="hover:text-blue-600">About</a>
             </nav>
           </div>
         </header>
         <main>{children}</main>
         <footer className="border-t bg-white py-8 text-center text-sm text-gray-500">
-          <p>AIエージェント時代の政治資金監視 — 人間が見ていなくても、エージェントが見ている</p>
+          <p>AIエージェント時代の政治資金監視 -- 人間が見ていなくても、エージェントが見ている</p>
           <p className="mt-1">政党にも企業にもよらない、完全オープンな政治テクノロジー基盤</p>
           <p className="mt-1">Open Japan PoliTech Platform | AGPL-3.0</p>
         </footer>
