@@ -19,7 +19,7 @@
 > **必要なもの**: [Docker](https://docs.docker.com/get-docker/) と [Git](https://git-scm.com/) だけ。Node.js / pnpm は自動インストールされます。
 
 ```bash
-git clone https://github.com/ochyai/open-japan-politech-platform.git && cd open-japan-politech-platform && bash setup.sh
+git clone https://github.com/ochyai/open-japan-politech-platform.git 2>/dev/null; cd open-japan-politech-platform && git pull -q && bash setup.sh
 ```
 
 セットアップが完了すると、3つのURLが表示されます:

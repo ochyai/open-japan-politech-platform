@@ -140,7 +140,7 @@ step_pct() {
 msg()   { echo -e "  ${DGRAY}│${R}  $*"; }
 ok()    { echo -e "  ${DGRAY}│${R}  ${GRN}✔${R} $*${CLR}"; }
 wrn()   { echo -e "  ${DGRAY}│${R}  ${GOLD}⚠${R}  $*${CLR}"; }
-head()  { echo -e "\n  ${HOT}◇${R}  ${B}$*${R}"; }
+section()  { echo -e "\n  ${HOT}◇${R}  ${B}$*${R}"; }
 
 die() {
   printf "\r${SHOW}"
@@ -191,6 +191,23 @@ port_in_use() {
   (echo >/dev/tcp/localhost/"$1") 2>/dev/null
 }
 
+# Kill all processes occupying OJPP ports (3000-3004)
+kill_port_users() {
+  local ports=(3000 3001 3002 3003 3004)
+  local killed=false
+  for p in "${ports[@]}"; do
+    local pids
+    pids=$(lsof -ti :"$p" 2>/dev/null || true)
+    if [ -n "$pids" ]; then
+      echo "$pids" | xargs kill -9 2>/dev/null || true
+      killed=true
+    fi
+  done
+  if [ "$killed" = true ]; then
+    sleep 1
+  fi
+}
+
 # =============================================================================
 #  BANNER
 # =============================================================================
@@ -225,7 +242,7 @@ grep -q "open-japan-politech-platform" package.json 2>/dev/null \
 # =============================================================================
 #  1. Docker
 # =============================================================================
-head "🔍 環境チェック"
+section "🔍 環境チェック"
 draw_bar 0
 echo ""
 
@@ -353,7 +370,8 @@ if ! $COMPOSE version >> "$LOG" 2>&1; then
     die "docker compose が見つかりません"
   fi
 fi
-ok "🐳 Docker $(docker --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+DOCKER_VER=$(docker --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | /usr/bin/head -1)
+ok "🐳 Docker ${DOCKER_VER}"
 step_pct
 
 # =============================================================================
@@ -411,7 +429,7 @@ step_pct
 # =============================================================================
 #  4. PostgreSQL
 # =============================================================================
-head "🐘 データベース"
+section "🐘 データベース"
 
 if port_in_use 54322; then
   ok "既存の PostgreSQL を検出 (localhost:54322) → 再利用 🎯"
@@ -443,7 +461,7 @@ step_pct
 # =============================================================================
 #  5. .env
 # =============================================================================
-head "📦 依存関係"
+section "📦 依存関係"
 
 if [ ! -f .env ]; then
   cp .env.example .env
@@ -464,7 +482,7 @@ step_pct
 # =============================================================================
 #  7. Database schema + seed
 # =============================================================================
-head "🗄️ データベースセットアップ"
+section "🗄️ データベースセットアップ"
 
 run_spin "Prisma Client を生成" pnpm db:generate \
   || die "Prisma Client の生成に失敗"
@@ -489,14 +507,21 @@ step_pct
 # =============================================================================
 #  8. Clean stale caches & start dev
 # =============================================================================
-head "🚀 アプリ起動"
+section "🚀 アプリ起動"
 
 # IMPORTANT: Remove stale .next caches to prevent module-not-found errors
 run_spin "ビルドキャッシュをクリーン 🧹" bash -c "rm -rf apps/*/.next apps/*/.turbo .turbo node_modules/.cache 2>/dev/null; echo ok"
 
+# Kill any leftover processes on OJPP ports (from previous runs)
+kill_port_users
+if port_in_use 3000 || port_in_use 3002 || port_in_use 3003; then
+  wrn "ポート 3000-3004 の既存プロセスを終了しました"
+fi
+
 DEV_LOG="/tmp/ojpp-dev-$(date +%s).log"
 
 start_dev() {
+  kill_port_users
   pnpm dev > "$DEV_LOG" 2>&1 &
   DEV_PID=$!
 }

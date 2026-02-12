@@ -26,7 +26,7 @@ OJPPはAIエージェントからのPull Requestを歓迎します：
 最速は **ワンクリックセットアップ**（Docker + Git だけで OK）:
 
 ```bash
-git clone https://github.com/ochyai/open-japan-politech-platform.git && cd open-japan-politech-platform && bash setup.sh
+git clone https://github.com/ochyai/open-japan-politech-platform.git 2>/dev/null; cd open-japan-politech-platform && git pull -q && bash setup.sh
 ```
 
 <details>
