@@ -237,14 +237,34 @@ draw_bar 0
 echo ""
 
 install_docker_mac() {
-  msg "${SKY}Docker Desktop をインストールします...${R}"
-  msg "${GRAY}(Homebrew 経由 — 数分かかります)${R}"
-  if run_spin "Docker Desktop をインストール" brew install --cask docker; then
-    msg ""
-    msg "${GOLD}${B}Docker Desktop を起動してください:${R}"
-    msg "  ${CYN}open -a Docker${R}"
-    msg "${GRAY}起動後、もう一度:${R}  ${CYN}bash setup.sh${R}"
-    echo ""; rainbow_bar; echo ""
+  echo ""
+  echo -e "  ${SKY}┌───────────────────────────────────────────────────────────${R}"
+  echo -e "  ${SKY}│${R}  ${B}🐳 Docker Desktop をインストール${R}"
+  echo -e "  ${SKY}│${R}  ${GRAY}Homebrew 経由でダウンロード (~1 GB) — 数分かかります${R}"
+  echo -e "  ${SKY}│${R}  ${GRAY}進捗バーが下に表示されます${R}"
+  echo -e "  ${SKY}└───────────────────────────────────────────────────────────${R}"
+  echo ""
+
+  # Show brew output directly — DO NOT hide in log
+  # User needs to see the download progress bar
+  if brew install --cask docker 2>&1 | while IFS= read -r line; do
+      # Prefix each line for visual consistency
+      echo -e "  ${DGRAY}│${R}  ${GRAY}${line}${R}"
+    done; then
+    echo ""
+    ok "Docker Desktop インストール完了 🐳"
+    echo ""
+    echo -e "  ${GOLD}┌───────────────────────────────────────────────────────────${R}"
+    echo -e "  ${GOLD}│${R}  ${B}Docker Desktop を起動してください${R}"
+    echo -e "  ${GOLD}│${R}"
+    echo -e "  ${GOLD}│${R}  ${CYN}  open -a Docker${R}"
+    echo -e "  ${GOLD}│${R}"
+    echo -e "  ${GOLD}│${R}  メニューバーに 🐳 アイコンが出たら:"
+    echo -e "  ${GOLD}│${R}  ${CYN}  bash setup.sh${R}"
+    echo -e "  ${GOLD}└───────────────────────────────────────────────────────────${R}"
+    echo ""
+    rainbow_bar
+    echo ""
     exit 0
   else
     return 1
