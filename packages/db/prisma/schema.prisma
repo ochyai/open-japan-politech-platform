@@ -1,0 +1,352 @@
+// Open Civic Platform - データベーススキーマ
+// 全政党・全政治家の政治資金データを統一的に管理
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// 政治主体（政党・政治家・政治団体）
+// ============================================
+
+/// 政党
+model Party {
+  id          String   @id @default(cuid())
+  name        String   @unique // 自民党、立憲民主党 等
+  shortName   String?  // 自民、立憲 等
+  color       String?  // ブランドカラー（#RRGGBB）
+  website     String?
+  founded     DateTime?
+  dissolved   DateTime?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  politicians   Politician[]
+  organizations PoliticalOrganization[]
+  policies      Policy[]
+
+  @@map("parties")
+}
+
+/// 政治家
+model Politician {
+  id            String   @id @default(cuid())
+  name          String
+  nameKana      String?
+  partyId       String?
+  party         Party?   @relation(fields: [partyId], references: [id])
+  chamber       Chamber? // 衆議院 or 参議院
+  district      String?  // 選挙区
+  prefectureId  String?
+  prefecture    Prefecture? @relation(fields: [prefectureId], references: [id])
+  isActive      Boolean  @default(true)
+  profileUrl    String?
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  organizations PoliticalOrganization[]
+  fundReports   FundReport[]
+  votes         Vote[]
+
+  @@map("politicians")
+}
+
+enum Chamber {
+  HOUSE_OF_REPRESENTATIVES // 衆議院
+  HOUSE_OF_COUNCILLORS     // 参議院
+  LOCAL                    // 地方議会
+}
+
+/// 都道府県
+model Prefecture {
+  id          String   @id @default(cuid())
+  code        String   @unique // JIS X 0401
+  name        String   @unique
+  politicians Politician[]
+
+  @@map("prefectures")
+}
+
+/// 政治団体（資金管理団体、後援会等）
+model PoliticalOrganization {
+  id            String   @id @default(cuid())
+  name          String
+  type          OrgType
+  partyId       String?
+  party         Party?   @relation(fields: [partyId], references: [id])
+  politicianId  String?
+  politician    Politician? @relation(fields: [politicianId], references: [id])
+  address       String?
+  representative String?
+  treasurer     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  fundReports   FundReport[]
+
+  @@map("political_organizations")
+}
+
+enum OrgType {
+  PARTY_BRANCH        // 政党支部
+  FUND_MANAGEMENT     // 資金管理団体
+  SUPPORT_GROUP       // 後援会
+  POLITICAL_COMMITTEE // 政治資金委員会
+  OTHER
+}
+
+// ============================================
+// 政治資金（OpenFunds）
+// ============================================
+
+/// 政治資金収支報告書
+model FundReport {
+  id               String   @id @default(cuid())
+  organizationId   String
+  organization     PoliticalOrganization @relation(fields: [organizationId], references: [id])
+  politicianId     String?
+  politician       Politician? @relation(fields: [politicianId], references: [id])
+  fiscalYear       Int      // 会計年度
+  reportingBody    String   // 届出先（総務省 or 都道府県選管）
+  totalIncome      BigInt   @default(0)
+  totalExpenditure BigInt   @default(0)
+  balance          BigInt   @default(0)
+  sourceUrl        String?  // 原本PDFのURL
+  status           ReportStatus @default(DRAFT)
+  publishedAt      DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  incomes      FundIncome[]
+  expenditures FundExpenditure[]
+
+  @@unique([organizationId, fiscalYear])
+  @@map("fund_reports")
+}
+
+enum ReportStatus {
+  DRAFT       // 下書き
+  SUBMITTED   // 提出済み
+  PUBLISHED   // 公開済み
+  VERIFIED    // 検証済み
+}
+
+/// 収入明細
+model FundIncome {
+  id          String   @id @default(cuid())
+  reportId    String
+  report      FundReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  category    IncomeCategory
+  subcategory String?
+  source      String?  // 寄付者名・団体名
+  amount      BigInt
+  date        DateTime?
+  description String?
+  createdAt   DateTime @default(now())
+
+  @@map("fund_incomes")
+}
+
+enum IncomeCategory {
+  PARTY_FEE           // 党費
+  DONATION_INDIVIDUAL // 個人からの寄附
+  DONATION_CORPORATE  // 法人からの寄附
+  DONATION_POLITICAL  // 政治団体からの寄附
+  PARTY_SUBSIDY       // 政党交付金
+  FUNDRAISING_EVENT   // 政治資金パーティー
+  BUSINESS_INCOME     // 事業収入
+  OTHER_INCOME        // その他の収入
+  CARRY_FORWARD       // 前年繰越
+}
+
+/// 支出明細
+model FundExpenditure {
+  id          String   @id @default(cuid())
+  reportId    String
+  report      FundReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  category    ExpenditureCategory
+  subcategory String?
+  recipient   String?  // 支出先
+  amount      BigInt
+  date        DateTime?
+  description String?
+  createdAt   DateTime @default(now())
+
+  @@map("fund_expenditures")
+}
+
+enum ExpenditureCategory {
+  PERSONNEL         // 人件費
+  OFFICE            // 光熱水費・事務所費
+  EQUIPMENT         // 備品・消耗品費
+  PRINTING          // 機関紙誌の発行事業費
+  PUBLICITY         // 宣伝事業費
+  POLITICAL_ACTIVITY // 政治活動費
+  DONATION_OUT      // 寄附・交付金
+  OTHER_EXPENSE     // その他の経費
+}
+
+// ============================================
+// 政策（OpenPolicy）
+// ============================================
+
+/// 政策文書
+model Policy {
+  id          String   @id @default(cuid())
+  title       String
+  category    String   // 教育、医療 等
+  partyId     String?
+  party       Party?   @relation(fields: [partyId], references: [id])
+  content     String   // Markdown
+  version     Int      @default(1)
+  gitRef      String?  // Git commit hash
+  status      PolicyStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  proposals   PolicyProposal[]
+
+  @@map("policies")
+}
+
+enum PolicyStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+/// 政策変更提案（PRに相当）
+model PolicyProposal {
+  id          String   @id @default(cuid())
+  policyId    String
+  policy      Policy   @relation(fields: [policyId], references: [id])
+  authorId    String?
+  title       String
+  description String
+  diff        String?  // 変更差分
+  status      ProposalStatus @default(OPEN)
+  gitPrUrl    String?  // GitHub PR URL
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("policy_proposals")
+}
+
+enum ProposalStatus {
+  OPEN
+  UNDER_REVIEW
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+}
+
+// ============================================
+// 議会（OpenGikai）
+// ============================================
+
+/// 国会会期
+model DietSession {
+  id        String   @id @default(cuid())
+  number    Int      // 第○○回
+  type      SessionType
+  startDate DateTime
+  endDate   DateTime?
+  createdAt DateTime @default(now())
+
+  bills     Bill[]
+
+  @@map("diet_sessions")
+}
+
+enum SessionType {
+  ORDINARY     // 通常国会
+  EXTRAORDINARY // 臨時国会
+  SPECIAL      // 特別国会
+}
+
+/// 法案
+model Bill {
+  id          String   @id @default(cuid())
+  sessionId   String
+  session     DietSession @relation(fields: [sessionId], references: [id])
+  number      String   // 法案番号
+  title       String
+  summary     String?  // AI要約
+  fullText    String?  // 法案全文
+  proposer    String?  // 提出者
+  category    String?
+  status      BillStatus @default(SUBMITTED)
+  submittedAt DateTime?
+  passedAt    DateTime?
+  sourceUrl   String?  // 衆議院/参議院の法案ページURL
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  votes       Vote[]
+  discussions Discussion[]
+
+  @@map("bills")
+}
+
+enum BillStatus {
+  SUBMITTED     // 提出
+  COMMITTEE     // 委員会審議中
+  PLENARY       // 本会議審議中
+  PASSED_LOWER  // 衆議院可決
+  PASSED_UPPER  // 参議院可決
+  ENACTED       // 成立
+  REJECTED      // 否決
+  WITHDRAWN     // 撤回
+}
+
+/// 議員の投票行動
+model Vote {
+  id            String   @id @default(cuid())
+  billId        String
+  bill          Bill     @relation(fields: [billId], references: [id])
+  politicianId  String
+  politician    Politician @relation(fields: [politicianId], references: [id])
+  voteType      VoteType
+  createdAt     DateTime @default(now())
+
+  @@unique([billId, politicianId])
+  @@map("votes")
+}
+
+enum VoteType {
+  FOR       // 賛成
+  AGAINST   // 反対
+  ABSTAIN   // 棄権
+  ABSENT    // 欠席
+}
+
+/// 市民による議論
+model Discussion {
+  id        String   @id @default(cuid())
+  billId    String
+  bill      Bill     @relation(fields: [billId], references: [id])
+  authorId  String?  // Supabase Auth user ID
+  content   String
+  stance    Stance?
+  parentId  String?
+  parent    Discussion? @relation("DiscussionReplies", fields: [parentId], references: [id])
+  replies   Discussion[] @relation("DiscussionReplies")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("discussions")
+}
+
+enum Stance {
+  FOR
+  AGAINST
+  NEUTRAL
+}

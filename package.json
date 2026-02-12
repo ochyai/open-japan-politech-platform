@@ -1,0 +1,28 @@
+{
+  "name": "open-civic-platform",
+  "version": "0.1.0",
+  "private": true,
+  "license": "AGPL-3.0",
+  "packageManager": "pnpm@10.4.0",
+  "scripts": {
+    "dev": "pnpm --parallel --recursive run dev",
+    "dev:funds": "pnpm --filter funds-web dev & pnpm --filter funds-admin dev",
+    "dev:policy": "pnpm --filter policy-web dev",
+    "dev:gikai": "pnpm --filter gikai-web dev & pnpm --filter gikai-admin dev",
+    "build": "pnpm --recursive run build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "pnpm --recursive run typecheck",
+    "test": "pnpm --recursive run test",
+    "db:generate": "pnpm --filter @open-civic/db generate",
+    "db:migrate": "pnpm --filter @open-civic/db migrate",
+    "db:seed": "pnpm --filter @open-civic/db seed",
+    "db:reset": "pnpm --filter @open-civic/db reset",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.0",
+    "typescript": "^5.7.0"
+  }
+}
