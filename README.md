@@ -14,6 +14,26 @@
 
 ---
 
+## 1行で起動
+
+> **必要なもの**: [Docker](https://docs.docker.com/get-docker/) と [Git](https://git-scm.com/) だけ。Node.js / pnpm は自動インストールされます。
+
+```bash
+git clone https://github.com/ochyai/open-japan-politech-platform.git && cd open-japan-politech-platform && bash setup.sh
+```
+
+セットアップが完了すると、3つのURLが表示されます:
+
+| アプリ | URL | 概要 |
+|---|---|---|
+| **MoneyGlass** | http://localhost:3000 | 政治資金可視化 |
+| **PolicyDiff** | http://localhost:3002 | 政策比較 |
+| **ParliScope** | http://localhost:3003 | 議会監視 |
+
+> 停止: `Ctrl+C` / 再起動: `bash setup.sh` / DB削除: `docker compose down -v`
+
+---
+
 ## なぜ今、PoliTechなのか
 
 政治は長く、政党と企業の専有物だった。政治資金の流れを追うには専門知識が必要だった。全政党の政策を比較するには膨大な時間がかかった。国会の法案を読み解くには法律の素養が求められた。
@@ -126,26 +146,27 @@
 
 ## クイックスタート
 
-### 前提条件
+### 自動セットアップ（推奨）
 
-- **Node.js** 22+
-- **pnpm** 10+
-- **PostgreSQL** (ローカル or [Supabase](https://supabase.com/))
-- **Supabase CLI**（ローカル開発時、任意）
+[上部の「1行で起動」](#1行で起動)を参照してください。`bash setup.sh` で Docker + Node.js + DB + 全アプリが自動で起動します。
 
-### セットアップ
+### 手動セットアップ
+
+<details>
+<summary>手動で個別にセットアップしたい場合</summary>
+
+**前提条件**: Node.js 22+ / pnpm 10+ / PostgreSQL（Docker or Supabase）
 
 ```bash
 # クローン
 git clone https://github.com/ochyai/open-japan-politech-platform.git
 cd open-japan-politech-platform
 
-# 環境変数
-cp .env.example .env
-# .env に DATABASE_URL 等を設定（.env.example を参照）
+# PostgreSQL を Docker で起動
+docker compose up -d
 
-# Supabase ローカル開発の場合（任意）
-npx supabase start
+# 環境変数（デフォルトで Docker の DB に接続します）
+cp .env.example .env
 
 # 依存関係インストール + DB準備
 pnpm install
@@ -159,6 +180,8 @@ pnpm ingest:all
 # 開発サーバー起動（全アプリ）
 pnpm dev
 ```
+
+</details>
 
 個別起動も可能:
 

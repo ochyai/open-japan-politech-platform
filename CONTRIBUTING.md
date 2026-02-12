@@ -23,17 +23,24 @@ OJPPはAIエージェントからのPull Requestを歓迎します：
 
 ## 開発環境のセットアップ
 
+最速は **ワンクリックセットアップ**（Docker + Git だけで OK）:
+
 ```bash
-# リポジトリをクローン
+git clone https://github.com/ochyai/open-japan-politech-platform.git && cd open-japan-politech-platform && bash setup.sh
+```
+
+<details>
+<summary>手動で個別にセットアップしたい場合</summary>
+
+```bash
 git clone https://github.com/ochyai/open-japan-politech-platform.git
 cd open-japan-politech-platform
 
-# 環境変数の設定
-cp .env.example .env
-# .env に DATABASE_URL 等を設定（.env.example を参照）
+# PostgreSQL を Docker で起動
+docker compose up -d
 
-# Supabase ローカル開発（推奨 — .env の変更不要でDB接続可能）
-npx supabase start
+# 環境変数（デフォルトで Docker の DB に接続します）
+cp .env.example .env
 
 # 依存関係のインストール
 pnpm install
@@ -49,6 +56,8 @@ pnpm ingest:all
 # 開発サーバーの起動
 pnpm dev
 ```
+
+</details>
 
 ## プロジェクト構成
 
