@@ -70,18 +70,6 @@ const HISTORICAL_PARTIES: HistoricalParty[] = [
     dissolved: "2014-11-28",
   },
   {
-    name: "社民党",
-    shortName: "社民",
-    color: "#4AA657",
-    founded: "1996-01-19",
-  },
-  {
-    name: "中道改革連合",
-    shortName: "中道",
-    color: "#1B5DA6",
-    founded: "2025-11-01",
-  },
-  {
     name: "減税日本・ゆうこく連合",
     shortName: "減税ゆ",
     color: "#FFD700",
@@ -92,12 +80,6 @@ const HISTORICAL_PARTIES: HistoricalParty[] = [
     shortName: "安楽死",
     color: "#9370DB",
     founded: "2020-06-01",
-  },
-  {
-    name: "NHK党",
-    shortName: "N党",
-    color: "#ED6C00",
-    founded: "2013-07-23",
   },
 ];
 

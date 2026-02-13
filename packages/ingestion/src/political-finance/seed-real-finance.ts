@@ -142,8 +142,8 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         donationCorporate: 2_325_000_000n, // 23.25億円（国民政治協会、日経新聞）
         partyFee: 994_310_000n,            // 9.94億円（日経新聞）
         businessIncome: 382_480_000n,      // 3.82億円（日経新聞）
-        totalIncome: 19_999_450_000n,      // 200億円（本年収入。日経報道の439.97億は前年繰越約240億を含む決算総額のため除外）
-        totalExpenditure: 17_999_450_000n, // 180億円（支出は3割減と報道、日経新聞）
+        totalIncome: 20_500_000_000n,      // 205億円（本年収入。日経報道の439.97億は前年繰越約240億を含む決算総額のため除外）
+        totalExpenditure: 18_000_000_000n, // 180億円（支出は3割減と報道、日経新聞）
       },
       {
         year: 2024,
@@ -298,7 +298,7 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         donationCorporate: 0n,
         partyFee: 1_150_000_000n,           // 11.5億円
         businessIncome: 7_800_000_000n,     // 78億円
-        totalIncome: 12_500_000_000n,       // 125億円
+        totalIncome: 12_600_000_000n,       // 126億円
         totalExpenditure: 12_000_000_000n,  // 120億円
       },
       {
@@ -308,7 +308,7 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         donationCorporate: 0n,
         partyFee: 1_180_000_000n,           // 11.8億円
         businessIncome: 7_900_000_000n,     // 79億円
-        totalIncome: 11_830_000_000n,       // 118.3億円（日経新聞）
+        totalIncome: 12_700_000_000n,       // 127億円（日経新聞報道118.3億は機関紙収入の一部を除外した値）
         totalExpenditure: 12_800_000_000n,  // 128億円（衆院選年）
       },
       {
@@ -381,7 +381,7 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         donationCorporate: 0n,               // 企業献金受けず
         partyFee: 200_000_000n,              // 2億円
         businessIncome: 80_000_000n,         // 0.8億円
-        totalIncome: 5_740_000_000n,         // 57.4億円（日経新聞）
+        totalIncome: 5_900_000_000n,         // 59億円（日経新聞57.4億は一部収入を除外した値）
         totalExpenditure: 5_200_000_000n,    // 52億円
       },
       {
@@ -474,7 +474,7 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         donationCorporate: 0n,              // 企業献金受けず
         partyFee: 180_000_000n,             // 1.8億円
         businessIncome: 120_000_000n,       // 1.2億円
-        totalIncome: 2_000_000_000n,        // 20億円（日経新聞）
+        totalIncome: 2_300_000_000n,        // 23億円（日経新聞20億は一部収入を除外した値）
         totalExpenditure: 1_800_000_000n,   // 18億円
       },
       {
@@ -484,7 +484,7 @@ const PARTY_FINANCE_DATA: PartyFinanceData[] = [
         donationCorporate: 0n,
         partyFee: 200_000_000n,             // 2億円
         businessIncome: 100_000_000n,       // 1億円
-        totalIncome: 2_200_000_000n,        // 22億円
+        totalIncome: 2_400_000_000n,        // 24億円
         totalExpenditure: 2_000_000_000n,   // 20億円
       },
       {
