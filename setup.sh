@@ -41,6 +41,8 @@ PS_COLOR='\033[38;5;141m'   # ParliScope  — vivid purple
 MGA_COLOR='\033[38;5;75m'   # MG Admin    — soft blue
 PSA_COLOR='\033[38;5;183m'  # PS Admin    — lavender
 SM_COLOR='\033[38;5;208m'   # SeatMap     — orange
+CS_COLOR='\033[38;5;214m'   # CultureScope — amber/gold
+SG_COLOR='\033[38;5;48m'    # SocialGuard  — emerald
 
 # Rainbow hues
 RAINBOW_HUES=(196 202 208 214 220 226 190 154 118 82 46 47 48 49 50 51 45 39 33 27 21 57 93 129 165 201 200 199 198 197)
@@ -51,7 +53,7 @@ SKIP_DOCKER=false
 COMPOSE=""
 TOTAL_START=$SECONDS
 STEP=0
-TOTAL_STEPS=13
+TOTAL_STEPS=14
 APP_PIDS=()
 
 # Ensure cursor is visible on exit
@@ -235,7 +237,8 @@ echo -ne "  "; rainbow "Open Japan PoliTech Platform"; echo -e "  ${DGRAY}v0.1${
 echo ""
 echo -e "  ${LAVD}🏛️  ${B}AIエージェント時代の政治インフラ${R} ${PINK}*:${R}${HOT}.${R}${GOLD}*${R}"
 echo -e "  ${GRAY}政党にも企業にもよらない、完全オープンな政治テクノロジー基盤${R}"
-echo -e "  ${DGRAY}${B}MoneyGlass${R}${DGRAY} · ${B}PolicyDiff${R}${DGRAY} · ${B}ParliScope${R}${DGRAY} — 15政党対応 🎌${R}"
+echo -e "  ${MG_COLOR}${B}MoneyGlass${R}${DGRAY} · ${PD_COLOR}${B}PolicyDiff${R}${DGRAY} · ${PS_COLOR}${B}ParliScope${R}${DGRAY} · ${SM_COLOR}${B}SeatMap${R}${DGRAY} · ${CS_COLOR}${B}CultureScope${R}${DGRAY} · ${SG_COLOR}${B}SocialGuard${R}"
+echo -e "  ${GRAY}6つのアプリで日本の政治を丸ごと可視化 — 15政党・47都道府県対応 🎌${R}"
 echo ""
 rainbow_bar_block
 echo ""
@@ -581,7 +584,7 @@ for app_dir in apps/*/; do
     ln -sf "../../.env" "${app_dir}.env"
   fi
 done
-ok "🔗 環境変数を全5アプリに配布完了 (DATABASE_URL etc.)"
+ok "🔗 環境変数を全8アプリに配布完了 (DATABASE_URL etc.)"
 step_pct
 
 # =============================================================================
@@ -648,22 +651,24 @@ section "🚀 アプリをぜんぶ起動するよ！ワクワク"
 run_spin "🧹 キャッシュをピカピカにお掃除" bash -c "rm -rf apps/*/.next apps/*/.turbo .turbo node_modules/.cache 2>/dev/null; echo ok"
 
 # Kill any leftover OJPP processes on default ports
-kill_ports 3000 3001 3002 3003 3004 3005
+kill_ports 3000 3001 3002 3003 3004 3005 3006 3007
 sleep 0.5
 
-# Find 5 free ports — auto-assign if defaults are occupied
+# Find 8 free ports — auto-assign if defaults are occupied
 PORT_MG=$(find_free_port 3000)
 PORT_MGA=$(find_free_port $((PORT_MG + 1)))
 PORT_PD=$(find_free_port $((PORT_MGA + 1)))
 PORT_PS=$(find_free_port $((PORT_PD + 1)))
 PORT_PSA=$(find_free_port $((PORT_PS + 1)))
 PORT_SM=$(find_free_port $((PORT_PSA + 1)))
+PORT_CS=$(find_free_port $((PORT_SM + 1)))
+PORT_SG=$(find_free_port $((PORT_CS + 1)))
 
-if [ "$PORT_MG" -ne 3000 ] || [ "$PORT_MGA" -ne 3001 ] || [ "$PORT_PD" -ne 3002 ] || [ "$PORT_PS" -ne 3003 ] || [ "$PORT_PSA" -ne 3004 ] || [ "$PORT_SM" -ne 3005 ]; then
+if [ "$PORT_MG" -ne 3000 ] || [ "$PORT_MGA" -ne 3001 ] || [ "$PORT_PD" -ne 3002 ] || [ "$PORT_PS" -ne 3003 ] || [ "$PORT_PSA" -ne 3004 ] || [ "$PORT_SM" -ne 3005 ] || [ "$PORT_CS" -ne 3006 ] || [ "$PORT_SG" -ne 3007 ]; then
   wrn "一部のポートが使用中 → 空いてるポートを見つけたよ！"
 fi
 
-ok "🎯 ポート割り当て: ${CYN}${PORT_MG}${R} ${CYN}${PORT_MGA}${R} ${CYN}${PORT_PD}${R} ${CYN}${PORT_PS}${R} ${CYN}${PORT_PSA}${R} ${CYN}${PORT_SM}${R}"
+ok "🎯 ポート割り当て: ${CYN}${PORT_MG}${R} ${CYN}${PORT_MGA}${R} ${CYN}${PORT_PD}${R} ${CYN}${PORT_PS}${R} ${CYN}${PORT_PSA}${R} ${CYN}${PORT_SM}${R} ${CYN}${PORT_CS}${R} ${CYN}${PORT_SG}${R}"
 
 # Start each Next.js app individually with the assigned port
 NEXT_BIN=""
@@ -691,7 +696,9 @@ start_all_apps() {
   start_one_app "apps/policydiff-web"    "$PORT_PD"  "pd-web"
   start_one_app "apps/parliscope-web"    "$PORT_PS"  "ps-web"
   start_one_app "apps/parliscope-admin"  "$PORT_PSA" "ps-admin"
-  [ -d "apps/seatmap-web" ] && start_one_app "apps/seatmap-web" "$PORT_SM" "sm-web"
+  [ -d "apps/seatmap-web" ]       && start_one_app "apps/seatmap-web"       "$PORT_SM" "sm-web"
+  [ -d "apps/culturescope-web" ]  && start_one_app "apps/culturescope-web"  "$PORT_CS" "cs-web"
+  [ -d "apps/socialguard-web" ]   && start_one_app "apps/socialguard-web"   "$PORT_SG" "sg-web"
 }
 
 start_all_apps
@@ -706,7 +713,7 @@ cleanup() {
   for pid in "${APP_PIDS[@]}"; do
     wait "$pid" 2>/dev/null || true
   done
-  kill_ports "$PORT_MG" "$PORT_MGA" "$PORT_PD" "$PORT_PS" "$PORT_PSA" "$PORT_SM"
+  kill_ports "$PORT_MG" "$PORT_MGA" "$PORT_PD" "$PORT_PS" "$PORT_PSA" "$PORT_SM" "$PORT_CS" "$PORT_SG"
   if [ "$SKIP_DOCKER" = false ]; then
     $COMPOSE down >> "$LOG" 2>&1 || true
   fi
@@ -754,7 +761,7 @@ wait_for_app() {
         RETRY_DONE=true
         printf "${SHOW}\r  ${DGRAY}│${R}  ${GOLD}⚡${R} アプリ再起動するね...ちょっと待って${CLR}\n"
         rm -rf apps/*/.next 2>/dev/null || true
-        kill_ports "$PORT_MG" "$PORT_MGA" "$PORT_PD" "$PORT_PS" "$PORT_PSA" "$PORT_SM"
+        kill_ports "$PORT_MG" "$PORT_MGA" "$PORT_PD" "$PORT_PS" "$PORT_PSA" "$PORT_SM" "$PORT_CS" "$PORT_SG"
         sleep 1
         start_all_apps
         sleep 2
@@ -777,10 +784,12 @@ wait_for_app() {
   done
 }
 
-wait_for_app "$PORT_MG"  "MoneyGlass"  "🏦" "$MG_COLOR"
-wait_for_app "$PORT_PD"  "PolicyDiff"  "📋" "$PD_COLOR"
-wait_for_app "$PORT_PS"  "ParliScope"  "🏛️ " "$PS_COLOR"
-[ -d "apps/seatmap-web" ] && wait_for_app "$PORT_SM" "SeatMap" "💺" "$SM_COLOR"
+wait_for_app "$PORT_MG"  "MoneyGlass"    "🏦" "$MG_COLOR"
+wait_for_app "$PORT_PD"  "PolicyDiff"    "📋" "$PD_COLOR"
+wait_for_app "$PORT_PS"  "ParliScope"    "🏛️ " "$PS_COLOR"
+[ -d "apps/seatmap-web" ]      && wait_for_app "$PORT_SM" "SeatMap"       "💺" "$SM_COLOR"
+[ -d "apps/culturescope-web" ] && wait_for_app "$PORT_CS" "CultureScope"  "🎨" "$CS_COLOR"
+[ -d "apps/socialguard-web" ]  && wait_for_app "$PORT_SG" "SocialGuard"   "🛡️ " "$SG_COLOR"
 step_pct
 
 # =============================================================================
@@ -811,25 +820,68 @@ rainbow_bar_block
 echo ""
 echo ""
 
-# Dynamic URL display
-echo -e "  ${MG_COLOR}${B}🏦 MoneyGlass${R}   ${DGRAY}→${R}  ${CYN}${UL}http://localhost:${PORT_MG}${R}"
-echo -e "     ${PEACH}政治資金の流れを可視化${R}"
-echo ""
-echo -e "  ${PD_COLOR}${B}📋 PolicyDiff${R}   ${DGRAY}→${R}  ${CYN}${UL}http://localhost:${PORT_PD}${R}"
-echo -e "     ${MINT}政策を比較する${R}"
-echo ""
-echo -e "  ${PS_COLOR}${B}🏛️  ParliScope${R}   ${DGRAY}→${R}  ${CYN}${UL}http://localhost:${PORT_PS}${R}"
-echo -e "     ${LAVD}国会を可視化する${R}"
-echo ""
-if [ -d "apps/seatmap-web" ]; then
-echo -e "  ${SM_COLOR}${B}💺 SeatMap${R}      ${DGRAY}→${R}  ${CYN}${UL}http://localhost:${PORT_SM}${R}"
-echo -e "     ${ORNG}議席配置を可視化する${R}"
-echo ""
-fi
-echo -e "  ${DGRAY}管理画面${R}  ${MGA_COLOR}localhost:${PORT_MGA}${R} (MoneyGlass)  ${PSA_COLOR}localhost:${PORT_PSA}${R} (ParliScope)"
+# ── App count ──
+APP_COUNT=6
+[ -d "apps/moneyglass-admin" ] && APP_COUNT=$((APP_COUNT + 1))
+[ -d "apps/parliscope-admin" ] && APP_COUNT=$((APP_COUNT + 1))
+
+# ── Decorative box top ──
+echo -e "  ${DGRAY}╔══════════════════════════════════════════════════════════════════════╗${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}  $(rainbow '★ 全 '"$APP_COUNT"' アプリ起動完了 ★')  ${WHT}${B}${MINS}分${SECS}秒${R}${GRAY}で構築${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+echo -e "  ${DGRAY}╠══════════════════════════════════════════════════════════════════════╣${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+
+# ── Public apps ──
+echo -e "  ${DGRAY}║${R}  ${MG_COLOR}${B}🏦 MoneyGlass${R}    ${DGRAY}─────${R}  ${CYN}${UL}http://localhost:${PORT_MG}${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${PEACH}政治資金を、ガラスのように透明に${R}                          ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GRAY}13政党 · 8年分 · 政治資金収支報告書${R}                       ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+
+echo -e "  ${DGRAY}║${R}  ${PD_COLOR}${B}📋 PolicyDiff${R}    ${DGRAY}─────${R}  ${CYN}${UL}http://localhost:${PORT_PD}${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${MINT}全政党の政策を、差分で比較する${R}                            ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GRAY}15政党 · 10カテゴリ · マニフェスト比較${R}                    ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+
+echo -e "  ${DGRAY}║${R}  ${PS_COLOR}${B}🏛️  ParliScope${R}    ${DGRAY}─────${R}  ${CYN}${UL}http://localhost:${PORT_PS}${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${LAVD}議会を、すべての人とエージェントに開く${R}                    ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GRAY}90法案 · 713議員 · 21会期${R}                                ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+
+echo -e "  ${DGRAY}║${R}  ${SM_COLOR}${B}💺 SeatMap${R}        ${DGRAY}─────${R}  ${CYN}${UL}http://localhost:${PORT_SM}${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${ORNG}議会の勢力図を、ひと目で把握する${R}                          ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GRAY}衆参両院 · 9選挙 · スプリング物理${R}                        ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+
+echo -e "  ${DGRAY}║${R}  ${CS_COLOR}${B}🎨 CultureScope${R}  ${DGRAY}─────${R}  ${CYN}${UL}http://localhost:${PORT_CS}${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GOLD}文化を、政治の言語で読み解く${R}                              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GRAY}96予算 · 20プログラム · 12分野 · 13政党スタンス${R}           ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+
+echo -e "  ${DGRAY}║${R}  ${SG_COLOR}${B}🛡️  SocialGuard${R}   ${DGRAY}─────${R}  ${CYN}${UL}http://localhost:${PORT_SG}${R}              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${MINT}社会保障の全体像を、ひと目で${R}                              ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}     ${GRAY}64予算 · 15制度 · 47都道府県 · 13政党スタンス${R}             ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+echo -e "  ${DGRAY}╠══════════════════════════════════════════════════════════════════════╣${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}  ${GRAY}管理画面${R}  ${MGA_COLOR}localhost:${PORT_MGA}${R} ${GRAY}(MoneyGlass)${R}  ${PSA_COLOR}localhost:${PORT_PSA}${R} ${GRAY}(ParliScope)${R} ${DGRAY}║${R}"
+echo -e "  ${DGRAY}║${R}                                                                      ${DGRAY}║${R}"
+echo -e "  ${DGRAY}╚══════════════════════════════════════════════════════════════════════╝${R}"
 echo ""
 
+# ── Data summary ──
+echo -e "  ${DGRAY}┌──────────────────────────────────────────────────────────────────┐${R}"
+echo -e "  ${DGRAY}│${R}  ${WHT}${B}📊 搭載データ${R}                                                   ${DGRAY}│${R}"
+echo -e "  ${DGRAY}│${R}                                                                    ${DGRAY}│${R}"
+echo -e "  ${DGRAY}│${R}  ${HOT}15${R}${GRAY}政党${R}  ${PURP}713${R}${GRAY}議員${R}  ${SKY}90${R}${GRAY}法案${R}  ${GOLD}9${R}${GRAY}選挙${R}  ${MINT}47${R}${GRAY}都道府県${R}  ${ORNG}29${R}${GRAY}DBモデル${R}    ${DGRAY}│${R}"
+echo -e "  ${DGRAY}│${R}  ${CS_COLOR}96${R}${GRAY}文化予算${R}  ${SG_COLOR}64${R}${GRAY}社保予算${R}  ${SG_COLOR}15${R}${GRAY}社保制度${R}  ${CS_COLOR}20${R}${GRAY}文化プログラム${R}       ${DGRAY}│${R}"
+echo -e "  ${DGRAY}│${R}                                                                    ${DGRAY}│${R}"
+echo -e "  ${DGRAY}│${R}  ${GRAY}データソース: 総務省・文化庁・厚労省・財務省・衆参両院公式${R}        ${DGRAY}│${R}"
+echo -e "  ${DGRAY}└──────────────────────────────────────────────────────────────────┘${R}"
 echo ""
+
+# ── Tips ──
 echo -e "  ${GOLD}💡 ブラウザで開く方法${R}"
 echo -e "  ${GRAY}────────────────────────────────────────────${R}"
 echo -e "  ${WHT}方法①${R} ${GRAY}URLを ${WHT}右クリック${R} ${GRAY}→「リンクを開く」を選ぶ${R}"
@@ -838,7 +890,7 @@ echo -e "          ${GRAY}→ ブラウザのアドレスバーに ${WHT}ペー�
 echo -e "  ${WHT}方法③${R} ${GRAY}⌘ キーを押しながら URL をクリック${R}"
 echo ""
 
-echo -ne "  "; rainbow "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧  セットアップ完了！！"; echo ""
+echo -ne "  "; rainbow "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧  全 ${APP_COUNT} アプリ起動完了！！"; echo ""
 echo -e "  ${WHT}${B}${MINS}分${SECS}秒${R}${GRAY}で全環境が整ったよ！さあ政治を見に行こう！${R}"
 echo ""
 
@@ -848,8 +900,8 @@ echo -e "  ${GRAY}データも消す${R}    ${DGRAY}→${R}  ${WHT}docker compos
 echo ""
 rainbow_bar
 echo ""
-echo -e "  ${PEACH}🎉 おめでとう！全ての準備が整ったよ！${R}"
-echo -e "  ${GRAY}上の URL をブラウザで開いて、日本の政治データを見てみよう${R}"
+echo -e "  ${PEACH}🎉 おめでとう！日本の政治データが手のひらに！${R}"
+echo -e "  ${GRAY}上の URL をブラウザで開いて、6つのアプリで政治を探索しよう${R}"
 echo ""
 
 # Keep running — wait for any app to exit, then wait for all

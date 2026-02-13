@@ -155,26 +155,6 @@ GovTech（行政DX）でもCivicTech（市民技術）でもない。**政治の
 
 ---
 
-## UX / アニメーション
-
-> **「ぬるぬるカッコいい」** — 政治データを、触って気持ちいいUIで届ける
-
-全アプリに [Motion](https://motion.dev/) と [Lenis](https://lenis.darkroom.engineering/) による滑らかなアニメーションを実装。
-
-| 機能 | 技術 | 体験 |
-|:---|:---|:---|
-| スムーススクロール | Lenis 慣性スクロール | 全ページが60fpsでぬるぬる |
-| ページ遷移 | `PageTransition` | フェード＋スライドアップ |
-| スクロールリビール | `useInView` + `ScrollReveal` | セクションがスクロールで出現 |
-| カードスタッガー | `StaggerGrid` + `StaggerItem` | カードが順番に時差表示 |
-| データバー | Spring物理 (stiffness:60) | 議席バー・投票バーがバネで伸びる |
-| グラスモーフィズム | Scroll-dependent backdrop-blur | ナビバーが半透明ガラス化 |
-| ホバーリフト | `whileHover` + boxShadow | カードが浮き上がる |
-| タップフィードバック | `whileTap` scale(0.97) | ボタンがバネで縮む |
-| パララックス | `useScroll` + `useTransform` | Hero背景がパララックス移動 |
-
----
-
 ## アーキテクチャ
 
 ```
@@ -477,6 +457,26 @@ open-japan-politech-platform/
 > 台湾・英国・米国・欧州・日本の5地域を6軸比較フレームワークで分析。
 
 [paper.pdf](paper/paper.pdf) / [paper.md](paper/paper.md)
+
+---
+
+## UX / アニメーション
+
+> **「ぬるぬるカッコいい」** — 政治データを、触って気持ちいいUIで届ける
+
+全アプリに [Motion](https://motion.dev/) と [Lenis](https://lenis.darkroom.engineering/) による滑らかなアニメーションを実装。
+
+| 機能 | 技術 | 体験 |
+|:---|:---|:---|
+| スムーススクロール | Lenis 慣性スクロール | 全ページが60fpsでぬるぬる |
+| ページ遷移 | `PageTransition` | フェード＋スライドアップ |
+| スクロールリビール | `useInView` + `ScrollReveal` | セクションがスクロールで出現 |
+| カードスタッガー | `StaggerGrid` + `StaggerItem` | カードが順番に時差表示 |
+| データバー | Spring物理 (stiffness:60) | 議席バー・投票バーがバネで伸びる |
+| グラスモーフィズム | Scroll-dependent backdrop-blur | ナビバーが半透明ガラス化 |
+| ホバーリフト | `whileHover` + boxShadow | カードが浮き上がる |
+| タップフィードバック | `whileTap` scale(0.97) | ボタンがバネで縮む |
+| パララックス | `useScroll` + `useTransform` | Hero背景がパララックス移動 |
 
 ---
 
