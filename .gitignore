@@ -28,6 +28,7 @@ build/
 Thumbs.db
 
 # Prisma
+packages/db/prisma/generated/
 packages/db/prisma/migrations/*.sql.bak
 
 # Supabase
@@ -54,3 +55,4 @@ signing_keys.json
 # Misc
 *.log
 npm-debug.log*
+.vercel

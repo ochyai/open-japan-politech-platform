@@ -97,7 +97,9 @@ export default async function Home() {
   const totalBudget = latestBudgets.find((b) => b.category === "TOTAL");
   const categoryBudgets = latestBudgets.filter((b) => b.category !== "TOTAL");
   const activePrograms = programs.filter((p) => p.isActive);
-  const totalRecipients = programs.reduce((sum, p) => sum + (p.recipients ?? 0), 0);
+  // 1人あたり社会保障費を算出（延べ受給者数は重複カウントのため使わない）
+  const JAPAN_POP = 12_400; // 万人（2026年推計）
+  const perCapita = totalBudget ? Math.round(Number(totalBudget.amount) / JAPAN_POP) : null;
 
   /* --- Donut chart data --- */
   const donutSegments = categoryBudgets
@@ -230,8 +232,8 @@ export default async function Home() {
               index={1}
             />
             <DarkStatCard
-              label="受給者数"
-              value={totalRecipients > 0 ? `${totalRecipients.toLocaleString()}万人` : "-"}
+              label="国民1人あたり"
+              value={perCapita ? `${perCapita.toLocaleString()}万円` : "-"}
               index={2}
             />
             <DarkStatCard
