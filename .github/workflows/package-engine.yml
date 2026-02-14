@@ -1,9 +1,10 @@
-name: Package SBCM Engine
+name: Package SBCM Integrated System
 
 on:
   push:
     paths:
-      - 'packages/sbcm-engine/**' # エンジンの中身が変わった時だけ発動
+      - 'packages/sbcm-engine/**'
+      - 'apps/moneyglass-web/**'
 
 jobs:
   build:
@@ -11,12 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create ZIP
+      - name: Create Integrated ZIP
         run: |
-          zip -r sbcm-engine-v0.1.0.zip packages/sbcm-engine/ -x "*.git*"
+          # エンジンとアプリの修正分を一つのフォルダにまとめる
+          mkdir -p dist/packages
+          mkdir -p dist/apps
+          
+          cp -r packages/sbcm-engine dist/packages/
+          cp -r apps/moneyglass-web dist/apps/
+          
+          # 不要な node_modules や .next を除外してZIP化
+          zip -r sbcm-moneyflow-v0.1.0.zip dist/ -x "*/node_modules/*" "*/.next/*"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sbcm-engine-package
-          path: sbcm-engine-v0.1.0.zip
+          name: sbcm-complete-package
+          path: sbcm-moneyflow-v0.1.0.zip
