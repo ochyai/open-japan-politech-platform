@@ -550,3 +550,23 @@ model SocialSecurityStance {
   @@unique([partyId, topic, year])
   @@map("social_security_stances")
 }
+
+// ============================================
+// 統治工学（SBCM）用拡張データ
+// ============================================
+
+/// 自治体（標準ブロック候補）の物理テレメトリ
+model GovernanceBlock {
+  id                String   @id @default(cuid())
+  code              String   @unique // 自治体コード
+  name              String
+  population        Int      // 人口
+  productionSigma   BigInt   // 生産量 (市町村民税など)
+  maintenanceDelta  BigInt   // 維持コスト (人件費・扶助費など)
+  inflowFlux        BigInt   // 流入エネルギー (地方交付税など)
+  outflowFlux       BigInt   // 流出エネルギー (中央還流など)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("governance_blocks")
+}
