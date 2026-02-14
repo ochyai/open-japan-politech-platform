@@ -1,12 +1,12 @@
-import { FlowState } from "../types";
+import type { FlowState } from "../types";
 
 export function analyzeFlowContinuity(state: FlowState) {
   // フラックスの発散 (Divergence)
   // div J > 0 ならばエネルギーが流出している（ストロー現象）
   const divergence = state.outflow - state.inflow;
-  
+
   // 経済密度 (rho) の変化率
-  const densityChange = (state.production - state.maintenance) - divergence;
+  const densityChange = state.production - state.maintenance - divergence;
 
   // ストロー現象の判定 (High Positive Divergence)
   // 地域が生み出した価値以上に流出している、かつ維持コストが高い
@@ -19,6 +19,6 @@ export function analyzeFlowContinuity(state: FlowState) {
     divergence,
     densityChange,
     isStrawEffect,
-    distortion
+    distortion,
   };
 }
