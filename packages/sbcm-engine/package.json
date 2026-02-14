@@ -1,0 +1,14 @@
+{
+  "name": "@ojpp/sbcm-engine",
+  "version": "0.1.0",
+  "description": "SBCM v4.0 Physics Engine for Governance Engineering",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "typescript": "^5.7.0"
+  }
+}
