@@ -30,7 +30,7 @@ export const SERVICES: ServiceDefinition[] = [
     glowColor: "rgba(255, 107, 53, 0.15)",
     port: 3000,
     url: "/moneyglass",
-    prodUrl: "https://moneyglass.ojpp.dev",
+    prodUrl: "/moneyglass",
     gridSpan: 2,
     kpiLabels: ["総収入", "総支出", "団体数", "報告書数"],
   },
