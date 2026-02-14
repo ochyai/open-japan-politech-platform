@@ -69,8 +69,8 @@ export function ScrollReveal({
   return (
     <div ref={ref} style={{ width }} className={className}>
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         {children}
@@ -90,10 +90,9 @@ const staggerContainer: Variants = {
 };
 
 const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    y: 0,
     transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
@@ -145,9 +144,9 @@ export function PageTransition({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       {children}

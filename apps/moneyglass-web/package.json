@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "generate:font-subset": "npx tsx scripts/generate-font-subset.ts"
   },
   "dependencies": {
     "@ojpp/api": "workspace:*",

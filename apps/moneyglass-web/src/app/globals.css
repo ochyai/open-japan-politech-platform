@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "@ojpp/ui/theme.css";
 
+/* サブセット(preload)→フルセット(on-demand)→Inter の順でフォールバック */
+@theme {
+  --font-sans: var(--font-noto-sans-jp), var(--font-noto-sans-jp-full), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
 /* MoneyGlass Dark Theme Custom Properties */
 :root {
   --mg-bg-primary: #0f1119;

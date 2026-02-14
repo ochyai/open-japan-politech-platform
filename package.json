@@ -43,6 +43,15 @@
     "ingest:all": "pnpm --filter @ojpp/ingestion ingest:all",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "esbuild",
+      "sharp"
+    ]
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.3.0",
     "typescript": "^5.7.0"

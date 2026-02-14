@@ -66,7 +66,7 @@ export function AnimatedCounter({
   }, [springValue]);
 
   return (
-    <motion.span ref={ref} className={className}>
+    <motion.span ref={ref} className={className} style={{ fontVariantNumeric: "tabular-nums" }}>
       {prefix}
       {display.toLocaleString()}
       {suffix}
