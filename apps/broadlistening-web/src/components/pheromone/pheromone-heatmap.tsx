@@ -75,6 +75,7 @@ export function PheromoneHeatmap({ sources, className }: PheromoneHeatmapProps) 
 
     function onMove(e: MouseEvent) {
       const rect = canvas?.getBoundingClientRect();
+      if (!rect) return;
       const mx = e.clientX - rect.left;
       const my = e.clientY - rect.top;
       const padding = 40;

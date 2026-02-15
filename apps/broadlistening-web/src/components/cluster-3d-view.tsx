@@ -157,6 +157,7 @@ export function Cluster3DView({ opinions, className }: Cluster3DViewProps) {
       } else {
         // Hover detection
         const rect = canvas?.getBoundingClientRect();
+        if (!rect) return;
         const mx = e.clientX - rect.left;
         const my = e.clientY - rect.top;
         let closestIdx: number | null = null;
