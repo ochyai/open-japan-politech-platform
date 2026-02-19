@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import { buildPaginatedResponse, handleApiError, jsonResponse, parsePagination } from "@ojpp/api";
 import { prisma } from "@ojpp/db";
 import type { NextRequest } from "next/server";

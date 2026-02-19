@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import { ApiError, handleApiError, jsonResponse, serializeBigInt } from "@ojpp/api";
 import { prisma } from "@ojpp/db";
 
