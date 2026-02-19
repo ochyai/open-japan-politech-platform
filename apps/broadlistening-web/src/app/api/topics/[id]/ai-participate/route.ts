@@ -1,4 +1,5 @@
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
+
 import { jsonResponse } from "@ojpp/api";
 import { prisma } from "@ojpp/db";
 import { complete, extractApiKey } from "@/lib/llm/client";
