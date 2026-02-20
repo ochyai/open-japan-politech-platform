@@ -50,6 +50,8 @@
     "analyze:socialguard": "ANALYZE=true pnpm --filter socialguard-web build",
     "analyze:portal": "ANALYZE=true pnpm --filter portal-web build",
     "analyze:broadlistening": "ANALYZE=true pnpm --filter broadlistening-web build",
+    "analyze:moneyglass-admin": "ANALYZE=true pnpm --filter moneyglass-admin build",
+    "analyze:parliscope-admin": "ANALYZE=true pnpm --filter parliscope-admin build",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules"
   },
   "pnpm": {
