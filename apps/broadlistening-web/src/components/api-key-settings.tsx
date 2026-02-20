@@ -42,6 +42,8 @@ export function ApiKeySettings({ apiKey, onApiKeyChange }: ApiKeySettingsProps) 
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState(apiKey);
   const [showKey, setShowKey] = useState(false);
+  const [validating, setValidating] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   useEffect(() => {
     setInputValue(apiKey);
@@ -49,6 +51,38 @@ export function ApiKeySettings({ apiKey, onApiKeyChange }: ApiKeySettingsProps) 
 
   const isSet = apiKey.length > 0;
   const maskedKey = apiKey ? `sk-ant-...${apiKey.slice(-8)}` : "";
+
+  async function handleSave() {
+    const nextKey = inputValue.trim();
+    if (!nextKey) {
+      onApiKeyChange("");
+      setValidationError(null);
+      setOpen(false);
+      return;
+    }
+
+    setValidating(true);
+    setValidationError(null);
+    try {
+      const res = await fetch("/api/health/apikey", {
+        method: "GET",
+        headers: apiHeaders(nextKey),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setValidationError(data.error ?? "APIキーが無効です。正しいキーを入力してください。");
+        return;
+      }
+
+      onApiKeyChange(nextKey);
+      setOpen(false);
+    } catch {
+      setValidationError("APIキーの検証に失敗しました。ネットワーク接続を確認してください。");
+    } finally {
+      setValidating(false);
+    }
+  }
 
   return (
     <div className="relative">
@@ -109,7 +143,10 @@ export function ApiKeySettings({ apiKey, onApiKeyChange }: ApiKeySettingsProps) 
               <input
                 type={showKey ? "text" : "password"}
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  if (validationError) setValidationError(null);
+                }}
                 placeholder="sk-ant-api03-..."
                 className="input-abyss text-xs py-2.5 pr-10"
               />
@@ -146,13 +183,11 @@ export function ApiKeySettings({ apiKey, onApiKeyChange }: ApiKeySettingsProps) 
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={() => {
-                  onApiKeyChange(inputValue.trim());
-                  setOpen(false);
-                }}
+                onClick={handleSave}
+                disabled={validating}
                 className="btn-glow text-[10px] py-1.5 px-4"
               >
-                保存
+                {validating ? "検証中..." : "保存"}
               </button>
               {isSet && (
                 <button
@@ -172,6 +207,9 @@ export function ApiKeySettings({ apiKey, onApiKeyChange }: ApiKeySettingsProps) 
                 </span>
               )}
             </div>
+            {validationError && (
+              <p className="mt-2 text-[10px] text-rose-300/80">{validationError}</p>
+            )}
           </div>
         </div>
       )}

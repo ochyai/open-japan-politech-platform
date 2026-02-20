@@ -33,3 +33,15 @@ export async function complete(
 export function extractApiKey(request: Request): string | undefined {
   return request.headers.get("x-anthropic-api-key") ?? undefined;
 }
+
+/** Validate API key by making a lightweight request to Anthropic */
+export async function validateApiKey(apiKey?: string): Promise<boolean> {
+  try {
+    const client = getClient(apiKey);
+    // models.list is a low-cost auth check and does not consume completion tokens.
+    await client.models.list();
+    return true;
+  } catch {
+    return false;
+  }
+}

@@ -170,6 +170,32 @@ export default function TopicDetailPage() {
     setError(null);
   }
 
+  async function validateApiKeyFor(actionName: string): Promise<boolean> {
+    if (!apiKey) {
+      setError(`APIキーが必要です。${actionName}の前に右上の「Set API Key」から設定してください。`);
+      return false;
+    }
+
+    try {
+      const res = await fetch("/api/health/apikey", {
+        method: "GET",
+        headers: apiHeaders(apiKey),
+      });
+      if (res.ok) return true;
+
+      const data = await res.json().catch(() => ({}));
+      setError(
+        `${actionName}に失敗: ${data.error ?? `ステータス ${res.status}`}。右上の「Set API Key」から有効なAnthropicのAPIキーを設定してください。`,
+      );
+      return false;
+    } catch (err) {
+      setError(
+        `${actionName}に失敗: ${err instanceof Error ? err.message : "APIキー検証に接続できません"}`,
+      );
+      return false;
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!opinionText.trim()) return;
@@ -198,8 +224,11 @@ export default function TopicDetailPage() {
   }
 
   async function handleAnalyze() {
-    setAnalyzing(true);
     setError(null);
+    const valid = await validateApiKeyFor("LLM分析");
+    if (!valid) return;
+
+    setAnalyzing(true);
     setAnalyzeProgress("分析開始...");
     setAnalyzePercent(0);
 
@@ -257,8 +286,11 @@ export default function TopicDetailPage() {
   }
 
   async function handleAi() {
-    setAiRunning(true);
     setError(null);
+    const valid = await validateApiKeyFor("AI参加");
+    if (!valid) return;
+
+    setAiRunning(true);
     try {
       const res = await fetch(`/api/topics/${topicId}/ai-participate`, {
         method: "POST",
@@ -634,7 +666,7 @@ export default function TopicDetailPage() {
                   density="normal"
                 />
               ) : (
-                <EmptyState onAi={handleAi} aiRunning={aiRunning} />
+                <EmptyState onAi={handleAi} aiRunning={aiRunning} hasApiKey={Boolean(apiKey)} />
               )}
             </div>
           </FadeIn>
@@ -755,7 +787,7 @@ export default function TopicDetailPage() {
               </div>
             ) : (
               <div className="glass-card overflow-hidden" style={{ minHeight: 400 }}>
-                <EmptyState onAi={handleAi} aiRunning={aiRunning} />
+                <EmptyState onAi={handleAi} aiRunning={aiRunning} hasApiKey={Boolean(apiKey)} />
               </div>
             )}
           </FadeIn>
@@ -772,7 +804,7 @@ export default function TopicDetailPage() {
                   className="h-[560px] w-full"
                 />
               ) : (
-                <EmptyState onAi={handleAi} aiRunning={aiRunning} />
+                <EmptyState onAi={handleAi} aiRunning={aiRunning} hasApiKey={Boolean(apiKey)} />
               )}
             </div>
           </FadeIn>
@@ -837,7 +869,7 @@ export default function TopicDetailPage() {
               {pSources.length > 0 ? (
                 <PheromoneHeatmap sources={pSources} className="h-[560px] w-full" />
               ) : (
-                <EmptyState onAi={handleAi} aiRunning={aiRunning} />
+                <EmptyState onAi={handleAi} aiRunning={aiRunning} hasApiKey={Boolean(apiKey)} />
               )}
             </div>
           </FadeIn>
@@ -862,7 +894,7 @@ export default function TopicDetailPage() {
                   className="h-[560px] w-full"
                 />
               ) : (
-                <EmptyState onAi={handleAi} aiRunning={aiRunning} />
+                <EmptyState onAi={handleAi} aiRunning={aiRunning} hasApiKey={Boolean(apiKey)} />
               )}
             </div>
             {clusters.length === 0 && opinions.length > 0 && (
@@ -998,7 +1030,15 @@ function _StanceColumn({
 }
 
 /* ── Empty State ── */
-function EmptyState({ onAi, aiRunning }: { onAi: () => void; aiRunning: boolean }) {
+function EmptyState({
+  onAi,
+  aiRunning,
+  hasApiKey,
+}: {
+  onAi: () => void;
+  aiRunning: boolean;
+  hasApiKey: boolean;
+}) {
   return (
     <div className="flex h-[480px] flex-col items-center justify-center text-center px-8 relative">
       {/* Floating background bubbles */}
@@ -1058,7 +1098,7 @@ function EmptyState({ onAi, aiRunning }: { onAi: () => void; aiRunning: boolean 
       <button
         type="button"
         onClick={onAi}
-        disabled={aiRunning}
+        disabled={aiRunning || !hasApiKey}
         className="btn-glow text-xs py-2.5 px-5"
       >
         {aiRunning ? "AI生成中..." : "AIに意見を生成させる（3つの視点）"}
