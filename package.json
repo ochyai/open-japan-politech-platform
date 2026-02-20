@@ -42,6 +42,14 @@
     "ingest:culture": "pnpm --filter @ojpp/ingestion ingest:culture",
     "ingest:social": "pnpm --filter @ojpp/ingestion ingest:social",
     "ingest:all": "pnpm --filter @ojpp/ingestion ingest:all",
+    "analyze": "ANALYZE=true pnpm --filter moneyglass-web build",
+    "analyze:policydiff": "ANALYZE=true pnpm --filter policydiff-web build",
+    "analyze:parliscope": "ANALYZE=true pnpm --filter parliscope-web build",
+    "analyze:seatmap": "ANALYZE=true pnpm --filter seatmap-web build",
+    "analyze:culturescope": "ANALYZE=true pnpm --filter culturescope-web build",
+    "analyze:socialguard": "ANALYZE=true pnpm --filter socialguard-web build",
+    "analyze:portal": "ANALYZE=true pnpm --filter portal-web build",
+    "analyze:broadlistening": "ANALYZE=true pnpm --filter broadlistening-web build",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules"
   },
   "pnpm": {
@@ -55,6 +63,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.0",
+    "@next/bundle-analyzer": "^16.1.6",
     "typescript": "catalog:"
   }
 }
