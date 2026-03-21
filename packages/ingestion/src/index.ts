@@ -9,3 +9,5 @@ export { seedCouncillors } from "./politicians/seed-councillors";
 export { seedRepresentatives } from "./politicians/seed-representatives";
 export { seedPrefectures } from "./prefectures/seed-prefectures";
 export { seedSocialSecurity } from "./social-security/seed-social-security";
+export { enrichPartyLogos } from "./data-enrichment/enrich-party-logos";
+export { enrichPoliticianImages } from "./data-enrichment/enrich-politician-images";

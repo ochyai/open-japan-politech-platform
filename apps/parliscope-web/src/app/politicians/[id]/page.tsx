@@ -63,9 +63,17 @@ export default async function PoliticianDetailPage({ params }: PageProps) {
 
         {/* Header */}
         <div className="mb-8 flex items-center gap-5">
-          <div className="flex h-18 w-18 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-3xl font-bold text-white shadow-lg shadow-indigo-500/20">
-            {politician.name.charAt(0)}
-          </div>
+          {politician.imageUrl ? (
+            <img
+              src={politician.imageUrl}
+              alt={politician.name}
+              className="h-18 w-18 rounded-full object-cover shadow-lg shadow-indigo-500/20"
+            />
+          ) : (
+            <div className="flex h-18 w-18 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-3xl font-bold text-white shadow-lg shadow-indigo-500/20">
+              {politician.name.charAt(0)}
+            </div>
+          )}
           <div>
             <h2 className="text-3xl font-bold text-white">{politician.name}</h2>
             {politician.nameKana && (
@@ -135,7 +143,14 @@ export default async function PoliticianDetailPage({ params }: PageProps) {
               <dl className="space-y-3 text-sm">
                 <div>
                   <dt className="text-[#6b7280]">政党</dt>
-                  <dd className="mt-0.5 font-medium text-white">
+                  <dd className="mt-0.5 flex items-center gap-2 font-medium text-white">
+                    {politician.party?.logoUrl && (
+                      <img
+                        src={politician.party.logoUrl}
+                        alt={politician.party.name}
+                        className="h-5 w-5 object-contain"
+                      />
+                    )}
                     {politician.party?.name ?? "無所属"}
                   </dd>
                 </div>
@@ -157,6 +172,21 @@ export default async function PoliticianDetailPage({ params }: PageProps) {
                   <div>
                     <dt className="text-[#6b7280]">都道府県</dt>
                     <dd className="mt-0.5 font-medium text-white">{politician.prefecture.name}</dd>
+                  </div>
+                )}
+                {politician.profileUrl && (
+                  <div>
+                    <dt className="text-[#6b7280]">プロフィール</dt>
+                    <dd className="mt-0.5">
+                      <a
+                        href={politician.profileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-indigo-400 transition-colors hover:text-indigo-300"
+                      >
+                        Wikipedia &rarr;
+                      </a>
+                    </dd>
                   </div>
                 )}
               </dl>

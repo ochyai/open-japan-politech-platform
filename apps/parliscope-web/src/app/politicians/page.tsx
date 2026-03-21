@@ -217,11 +217,19 @@ export default async function PoliticiansPage({ searchParams }: PageProps) {
                     className={`absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${partyColor.gradient} opacity-60`}
                   />
                   <div className="flex items-center gap-3">
-                    <div
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${partyColor.gradient} text-sm font-bold text-white shadow-lg`}
-                    >
-                      {pol.name.charAt(0)}
-                    </div>
+                    {pol.imageUrl ? (
+                      <img
+                        src={pol.imageUrl}
+                        alt={pol.name}
+                        className="h-11 w-11 shrink-0 rounded-full object-cover shadow-lg"
+                      />
+                    ) : (
+                      <div
+                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${partyColor.gradient} text-sm font-bold text-white shadow-lg`}
+                      >
+                        {pol.name.charAt(0)}
+                      </div>
+                    )}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="font-semibold text-white group-hover:text-indigo-300 transition-colors">

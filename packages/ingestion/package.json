@@ -17,7 +17,10 @@
     "ingest:real-bills": "dotenv -e ../../.env -- tsx src/kokkai/seed-real-bills.ts",
     "ingest:culture": "dotenv -e ../../.env -- tsx src/cultural-policy/seed-cultural-data.ts",
     "ingest:social": "dotenv -e ../../.env -- tsx src/social-security/seed-social-security.ts",
-    "ingest:all": "pnpm ingest:prefectures && pnpm ingest:finance && pnpm ingest:real-finance && pnpm ingest:parliament && pnpm ingest:real-bills && pnpm ingest:manifesto && pnpm ingest:elections && pnpm ingest:councillors && pnpm ingest:representatives && pnpm ingest:culture && pnpm ingest:social",
+    "enrich:party-logos": "dotenv -e ../../.env -- tsx src/data-enrichment/enrich-party-logos.ts",
+    "enrich:politician-images": "dotenv -e ../../.env -- tsx src/data-enrichment/enrich-politician-images.ts",
+    "enrich:all": "dotenv -e ../../.env -- tsx src/data-enrichment/enrich-all.ts",
+    "ingest:all": "pnpm ingest:prefectures && pnpm ingest:finance && pnpm ingest:real-finance && pnpm ingest:parliament && pnpm ingest:real-bills && pnpm ingest:manifesto && pnpm ingest:elections && pnpm ingest:councillors && pnpm ingest:representatives && pnpm ingest:culture && pnpm ingest:social && pnpm enrich:all",
     "test": "vitest run"
   },
   "dependencies": {
