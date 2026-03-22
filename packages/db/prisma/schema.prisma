@@ -23,6 +23,7 @@ model Party {
   name        String   @unique // 自民党、立憲民主党 等
   shortName   String?  // 自民、立憲 等
   color       String?  // ブランドカラー（#RRGGBB）
+  logoUrl     String?  // 政党ロゴ画像URL
   website     String?
   founded     DateTime?
   dissolved   DateTime?
