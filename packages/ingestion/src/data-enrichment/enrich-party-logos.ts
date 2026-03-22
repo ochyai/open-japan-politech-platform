@@ -36,77 +36,77 @@ const PARTY_BRANDS: PartyBrandInfo[] = [
   {
     name: "自由民主党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Logo_of_the_Liberal_Democratic_Party_of_Japan_%282024%29.svg/200px-Logo_of_the_Liberal_Democratic_Party_of_Japan_%282024%29.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Liberal_Democratic_Party_of_Japan_logo.svg/250px-Liberal_Democratic_Party_of_Japan_logo.svg.png",
     color: "#E2001A",
     website: "https://www.jimin.jp/",
   },
   {
     name: "立憲民主党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Constitutional_Democratic_Party_of_Japan_logo.svg/200px-Constitutional_Democratic_Party_of_Japan_logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Constitutional_Democratic_Party_of_Japan_%28Rikken%29.svg/250px-Constitutional_Democratic_Party_of_Japan_%28Rikken%29.svg.png",
     color: "#1E4D8C",
     website: "https://cdp-japan.jp/",
   },
   {
     name: "日本維新の会",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Nippon_Ishin_no_Kai_logo_2020.svg/200px-Nippon_Ishin_no_Kai_logo_2020.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/2/2b/Nippon_Ishin_no_Kai_Text_Logo.png",
     color: "#00884B",
     website: "https://o-ishin.jp/",
   },
   {
     name: "国民民主党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Democratic_Party_for_the_People_%28Japan%2C_2020%29_logo.svg/200px-Democratic_Party_for_the_People_%28Japan%2C_2020%29_logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Logo_of_Democratic_Party_For_the_People.svg/250px-Logo_of_Democratic_Party_For_the_People.svg.png",
     color: "#F5A800",
     website: "https://new-kokumin.jp/",
   },
   {
     name: "公明党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/New_Komeito_logo.svg/200px-New_Komeito_logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Komeito_logo.svg/250px-Komeito_logo.svg.png",
     color: "#F39800",
     website: "https://www.komei.or.jp/",
   },
   {
     name: "日本共産党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Japanese_Communist_Party_logo.svg/200px-Japanese_Communist_Party_logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Japanese_Communist_Party_logo.svg/250px-Japanese_Communist_Party_logo.svg.png",
     color: "#CC0000",
     website: "https://www.jcp.or.jp/",
   },
   {
     name: "れいわ新選組",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Reiwa_Shinsengumi_Logo.svg/200px-Reiwa_Shinsengumi_Logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Logo_Reiwa.svg/250px-Logo_Reiwa.svg.png",
     color: "#ED6EA0",
     website: "https://reiwa-shinsengumi.com/",
   },
   {
     name: "社会民主党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Social_Democratic_Party_Japan_Logo.svg/200px-Social_Democratic_Party_Japan_Logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Social_Democratic_Party_Logo.svg/250px-Social_Democratic_Party_Logo.svg.png",
     color: "#2E8B57",
     website: "https://sdp.or.jp/",
   },
   {
     name: "参政党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Sanseito_logo.png/200px-Sanseito_logo.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Sanseito_Logo_%282025%29.svg/250px-Sanseito_Logo_%282025%29.svg.png",
     color: "#FF8C00",
     website: "https://www.sanseito.jp/",
   },
   {
     name: "日本保守党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Japan_Conservative_Party_logo.svg/200px-Japan_Conservative_Party_logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/The_Logo_of_the_Conservative_Party_of_Japan%2C_2024.svg/250px-The_Logo_of_the_Conservative_Party_of_Japan%2C_2024.svg.png",
     color: "#1B3A6B",
     website: "https://hoshuto.jp/",
   },
   {
     name: "NHK党",
     logoUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/NHK_Party_logo.svg/200px-NHK_Party_logo.svg.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/The_Party_that_Teaches_How_to_Not_Pay_the_NHK_License_Fee_logo.svg/250px-The_Party_that_Teaches_How_to_Not_Pay_the_NHK_License_Fee_logo.svg.png",
     color: "#00BFFF",
     website: "https://www.nhk-party.jp/",
   },
